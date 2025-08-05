@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<title>اختبار تفاعلي - مكونات الخلية</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+  body {
+    margin: 0;
+    padding: 20px;
+    direction: rtl;
+    background-color: #f0f2f5;
+    color: #333;
+    font-family: 'Roboto', Arial, sans-serif;
+  }
+  h1 {
+    text-align: center;
+    color: #004b8d;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+  .question {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-left: 6px solid #0077cc;
+  }
+  .question p {
+    margin: 0 0 15px;
+    line-height: 1.5;
+    font-size: 1rem;
+  }
+  .options label {
+    display: block;
+    position: relative;
+    padding: 10px 15px;
+    margin: 6px 0;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    font-size: 0.95rem;
+  }
+  .options label:hover {
+    background-color: #e6f4ff;
+    border-color: #91c4ff;
+  }
+  .options input[type="radio"] {
+    margin-left: 10px;
+    accent-color: #0077cc;
+  }
+  input[type="button"] {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    background-color: #0077cc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  input[type="button"]:hover {
+    background-color: #005fa3;
+  }
+</style>
+</head>
+<body>
+<h1>اختبار تفاعلي: مكونات الخلية / Interactive Cell Quiz</h1>
+<form id="quizForm">
+
+    <div class="question">
+      <p><strong>السؤال 1:</strong> ما هي العضية المسؤولة عن إنتاج الطاقة في الخلية حقيقية النواة؟<br />
+      <strong>Question 1:</strong> Which organelle is responsible for energy production in a eukaryotic cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q1" value="correct" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q1" value="wrong" /> النواة / Nucleus</label>
+<label><input type="radio" name="q1" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q1" value="wrong" /> جهاز غولجي / Golgi apparatus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 2:</strong> ما هو الغشاء البلازمي مصنوع بشكل أساسي من؟<br />
+      <strong>Question 2:</strong> What is the plasma membrane primarily made of?</p>
+      <div class="options">
+    <label><input type="radio" name="q2" value="correct" /> الدهون والبروتينات / Lipids and proteins</label>
+<label><input type="radio" name="q2" value="wrong" /> DNA و RNA / DNA and RNA</label>
+<label><input type="radio" name="q2" value="wrong" /> السليلوز / Cellulose</label>
+<label><input type="radio" name="q2" value="wrong" /> الكربوهيدرات فقط / Only carbohydrates</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 3:</strong> ما وظيفة الريبوسومات؟<br />
+      <strong>Question 3:</strong> What is the function of ribosomes?</p>
+      <div class="options">
+    <label><input type="radio" name="q3" value="correct" /> تصنيع البروتين / Protein synthesis</label>
+<label><input type="radio" name="q3" value="wrong" /> إنتاج الطاقة / Energy production</label>
+<label><input type="radio" name="q3" value="wrong" /> نقل الجزيئات / Transport molecules</label>
+<label><input type="radio" name="q3" value="wrong" /> هضم الجزيئات / Digest molecules</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 4:</strong> أين يتم تخزين المعلومات الوراثية في الخلية؟<br />
+      <strong>Question 4:</strong> Where is genetic information stored in the cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q4" value="correct" /> في النواة / In the nucleus</label>
+<label><input type="radio" name="q4" value="wrong" /> في الميتوكوندريا / In the mitochondria</label>
+<label><input type="radio" name="q4" value="wrong" /> في جهاز غولجي / In the Golgi apparatus</label>
+<label><input type="radio" name="q4" value="wrong" /> في الشبكة الإندوبلازمية / In the endoplasmic reticulum</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 5:</strong> أي مما يلي موجود فقط في الخلايا النباتية؟<br />
+      <strong>Question 5:</strong> Which of the following is found only in plant cells?</p>
+      <div class="options">
+    <label><input type="radio" name="q5" value="correct" /> البلاستيدات الخضراء / Chloroplasts</label>
+<label><input type="radio" name="q5" value="wrong" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q5" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q5" value="wrong" /> النواة / Nucleus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 6:</strong> ما هي وظيفة جهاز غولجي؟<br />
+      <strong>Question 6:</strong> What is the function of the Golgi apparatus?</p>
+      <div class="options">
+    <label><input type="radio" name="q6" value="correct" /> تعديل وتغليف البروتينات / Modify and package proteins</label>
+<label><input type="radio" name="q6" value="wrong" /> إنتاج الطاقة / Produce energy</label>
+<label><input type="radio" name="q6" value="wrong" /> تخزين الماء / Store water</label>
+<label><input type="radio" name="q6" value="wrong" /> نقل الإشارات / Signal transmission</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 7:</strong> ما هي العضية المسؤولة عن إنتاج الطاقة في الخلية حقيقية النواة؟<br />
+      <strong>Question 7:</strong> Which organelle is responsible for energy production in a eukaryotic cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q7" value="correct" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q7" value="wrong" /> النواة / Nucleus</label>
+<label><input type="radio" name="q7" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q7" value="wrong" /> جهاز غولجي / Golgi apparatus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 8:</strong> ما هو الغشاء البلازمي مصنوع بشكل أساسي من؟<br />
+      <strong>Question 8:</strong> What is the plasma membrane primarily made of?</p>
+      <div class="options">
+    <label><input type="radio" name="q8" value="correct" /> الدهون والبروتينات / Lipids and proteins</label>
+<label><input type="radio" name="q8" value="wrong" /> DNA و RNA / DNA and RNA</label>
+<label><input type="radio" name="q8" value="wrong" /> السليلوز / Cellulose</label>
+<label><input type="radio" name="q8" value="wrong" /> الكربوهيدرات فقط / Only carbohydrates</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 9:</strong> ما وظيفة الريبوسومات؟<br />
+      <strong>Question 9:</strong> What is the function of ribosomes?</p>
+      <div class="options">
+    <label><input type="radio" name="q9" value="correct" /> تصنيع البروتين / Protein synthesis</label>
+<label><input type="radio" name="q9" value="wrong" /> إنتاج الطاقة / Energy production</label>
+<label><input type="radio" name="q9" value="wrong" /> نقل الجزيئات / Transport molecules</label>
+<label><input type="radio" name="q9" value="wrong" /> هضم الجزيئات / Digest molecules</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 10:</strong> أين يتم تخزين المعلومات الوراثية في الخلية؟<br />
+      <strong>Question 10:</strong> Where is genetic information stored in the cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q10" value="correct" /> في النواة / In the nucleus</label>
+<label><input type="radio" name="q10" value="wrong" /> في الميتوكوندريا / In the mitochondria</label>
+<label><input type="radio" name="q10" value="wrong" /> في جهاز غولجي / In the Golgi apparatus</label>
+<label><input type="radio" name="q10" value="wrong" /> في الشبكة الإندوبلازمية / In the endoplasmic reticulum</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 11:</strong> أي مما يلي موجود فقط في الخلايا النباتية؟<br />
+      <strong>Question 11:</strong> Which of the following is found only in plant cells?</p>
+      <div class="options">
+    <label><input type="radio" name="q11" value="correct" /> البلاستيدات الخضراء / Chloroplasts</label>
+<label><input type="radio" name="q11" value="wrong" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q11" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q11" value="wrong" /> النواة / Nucleus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 12:</strong> ما هي وظيفة جهاز غولجي؟<br />
+      <strong>Question 12:</strong> What is the function of the Golgi apparatus?</p>
+      <div class="options">
+    <label><input type="radio" name="q12" value="correct" /> تعديل وتغليف البروتينات / Modify and package proteins</label>
+<label><input type="radio" name="q12" value="wrong" /> إنتاج الطاقة / Produce energy</label>
+<label><input type="radio" name="q12" value="wrong" /> تخزين الماء / Store water</label>
+<label><input type="radio" name="q12" value="wrong" /> نقل الإشارات / Signal transmission</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 13:</strong> ما هي العضية المسؤولة عن إنتاج الطاقة في الخلية حقيقية النواة؟<br />
+      <strong>Question 13:</strong> Which organelle is responsible for energy production in a eukaryotic cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q13" value="correct" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q13" value="wrong" /> النواة / Nucleus</label>
+<label><input type="radio" name="q13" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q13" value="wrong" /> جهاز غولجي / Golgi apparatus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 14:</strong> ما هو الغشاء البلازمي مصنوع بشكل أساسي من؟<br />
+      <strong>Question 14:</strong> What is the plasma membrane primarily made of?</p>
+      <div class="options">
+    <label><input type="radio" name="q14" value="correct" /> الدهون والبروتينات / Lipids and proteins</label>
+<label><input type="radio" name="q14" value="wrong" /> DNA و RNA / DNA and RNA</label>
+<label><input type="radio" name="q14" value="wrong" /> السليلوز / Cellulose</label>
+<label><input type="radio" name="q14" value="wrong" /> الكربوهيدرات فقط / Only carbohydrates</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 15:</strong> ما وظيفة الريبوسومات؟<br />
+      <strong>Question 15:</strong> What is the function of ribosomes?</p>
+      <div class="options">
+    <label><input type="radio" name="q15" value="correct" /> تصنيع البروتين / Protein synthesis</label>
+<label><input type="radio" name="q15" value="wrong" /> إنتاج الطاقة / Energy production</label>
+<label><input type="radio" name="q15" value="wrong" /> نقل الجزيئات / Transport molecules</label>
+<label><input type="radio" name="q15" value="wrong" /> هضم الجزيئات / Digest molecules</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 16:</strong> أين يتم تخزين المعلومات الوراثية في الخلية؟<br />
+      <strong>Question 16:</strong> Where is genetic information stored in the cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q16" value="correct" /> في النواة / In the nucleus</label>
+<label><input type="radio" name="q16" value="wrong" /> في الميتوكوندريا / In the mitochondria</label>
+<label><input type="radio" name="q16" value="wrong" /> في جهاز غولجي / In the Golgi apparatus</label>
+<label><input type="radio" name="q16" value="wrong" /> في الشبكة الإندوبلازمية / In the endoplasmic reticulum</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 17:</strong> أي مما يلي موجود فقط في الخلايا النباتية؟<br />
+      <strong>Question 17:</strong> Which of the following is found only in plant cells?</p>
+      <div class="options">
+    <label><input type="radio" name="q17" value="correct" /> البلاستيدات الخضراء / Chloroplasts</label>
+<label><input type="radio" name="q17" value="wrong" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q17" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q17" value="wrong" /> النواة / Nucleus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 18:</strong> ما هي وظيفة جهاز غولجي؟<br />
+      <strong>Question 18:</strong> What is the function of the Golgi apparatus?</p>
+      <div class="options">
+    <label><input type="radio" name="q18" value="correct" /> تعديل وتغليف البروتينات / Modify and package proteins</label>
+<label><input type="radio" name="q18" value="wrong" /> إنتاج الطاقة / Produce energy</label>
+<label><input type="radio" name="q18" value="wrong" /> تخزين الماء / Store water</label>
+<label><input type="radio" name="q18" value="wrong" /> نقل الإشارات / Signal transmission</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 19:</strong> ما هي العضية المسؤولة عن إنتاج الطاقة في الخلية حقيقية النواة؟<br />
+      <strong>Question 19:</strong> Which organelle is responsible for energy production in a eukaryotic cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q19" value="correct" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q19" value="wrong" /> النواة / Nucleus</label>
+<label><input type="radio" name="q19" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q19" value="wrong" /> جهاز غولجي / Golgi apparatus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 20:</strong> ما هو الغشاء البلازمي مصنوع بشكل أساسي من؟<br />
+      <strong>Question 20:</strong> What is the plasma membrane primarily made of?</p>
+      <div class="options">
+    <label><input type="radio" name="q20" value="correct" /> الدهون والبروتينات / Lipids and proteins</label>
+<label><input type="radio" name="q20" value="wrong" /> DNA و RNA / DNA and RNA</label>
+<label><input type="radio" name="q20" value="wrong" /> السليلوز / Cellulose</label>
+<label><input type="radio" name="q20" value="wrong" /> الكربوهيدرات فقط / Only carbohydrates</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 21:</strong> ما وظيفة الريبوسومات؟<br />
+      <strong>Question 21:</strong> What is the function of ribosomes?</p>
+      <div class="options">
+    <label><input type="radio" name="q21" value="correct" /> تصنيع البروتين / Protein synthesis</label>
+<label><input type="radio" name="q21" value="wrong" /> إنتاج الطاقة / Energy production</label>
+<label><input type="radio" name="q21" value="wrong" /> نقل الجزيئات / Transport molecules</label>
+<label><input type="radio" name="q21" value="wrong" /> هضم الجزيئات / Digest molecules</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 22:</strong> أين يتم تخزين المعلومات الوراثية في الخلية؟<br />
+      <strong>Question 22:</strong> Where is genetic information stored in the cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q22" value="correct" /> في النواة / In the nucleus</label>
+<label><input type="radio" name="q22" value="wrong" /> في الميتوكوندريا / In the mitochondria</label>
+<label><input type="radio" name="q22" value="wrong" /> في جهاز غولجي / In the Golgi apparatus</label>
+<label><input type="radio" name="q22" value="wrong" /> في الشبكة الإندوبلازمية / In the endoplasmic reticulum</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 23:</strong> أي مما يلي موجود فقط في الخلايا النباتية؟<br />
+      <strong>Question 23:</strong> Which of the following is found only in plant cells?</p>
+      <div class="options">
+    <label><input type="radio" name="q23" value="correct" /> البلاستيدات الخضراء / Chloroplasts</label>
+<label><input type="radio" name="q23" value="wrong" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q23" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q23" value="wrong" /> النواة / Nucleus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 24:</strong> ما هي وظيفة جهاز غولجي؟<br />
+      <strong>Question 24:</strong> What is the function of the Golgi apparatus?</p>
+      <div class="options">
+    <label><input type="radio" name="q24" value="correct" /> تعديل وتغليف البروتينات / Modify and package proteins</label>
+<label><input type="radio" name="q24" value="wrong" /> إنتاج الطاقة / Produce energy</label>
+<label><input type="radio" name="q24" value="wrong" /> تخزين الماء / Store water</label>
+<label><input type="radio" name="q24" value="wrong" /> نقل الإشارات / Signal transmission</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 25:</strong> ما هي العضية المسؤولة عن إنتاج الطاقة في الخلية حقيقية النواة؟<br />
+      <strong>Question 25:</strong> Which organelle is responsible for energy production in a eukaryotic cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q25" value="correct" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q25" value="wrong" /> النواة / Nucleus</label>
+<label><input type="radio" name="q25" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q25" value="wrong" /> جهاز غولجي / Golgi apparatus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 26:</strong> ما هو الغشاء البلازمي مصنوع بشكل أساسي من؟<br />
+      <strong>Question 26:</strong> What is the plasma membrane primarily made of?</p>
+      <div class="options">
+    <label><input type="radio" name="q26" value="correct" /> الدهون والبروتينات / Lipids and proteins</label>
+<label><input type="radio" name="q26" value="wrong" /> DNA و RNA / DNA and RNA</label>
+<label><input type="radio" name="q26" value="wrong" /> السليلوز / Cellulose</label>
+<label><input type="radio" name="q26" value="wrong" /> الكربوهيدرات فقط / Only carbohydrates</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 27:</strong> ما وظيفة الريبوسومات؟<br />
+      <strong>Question 27:</strong> What is the function of ribosomes?</p>
+      <div class="options">
+    <label><input type="radio" name="q27" value="correct" /> تصنيع البروتين / Protein synthesis</label>
+<label><input type="radio" name="q27" value="wrong" /> إنتاج الطاقة / Energy production</label>
+<label><input type="radio" name="q27" value="wrong" /> نقل الجزيئات / Transport molecules</label>
+<label><input type="radio" name="q27" value="wrong" /> هضم الجزيئات / Digest molecules</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 28:</strong> أين يتم تخزين المعلومات الوراثية في الخلية؟<br />
+      <strong>Question 28:</strong> Where is genetic information stored in the cell?</p>
+      <div class="options">
+    <label><input type="radio" name="q28" value="correct" /> في النواة / In the nucleus</label>
+<label><input type="radio" name="q28" value="wrong" /> في الميتوكوندريا / In the mitochondria</label>
+<label><input type="radio" name="q28" value="wrong" /> في جهاز غولجي / In the Golgi apparatus</label>
+<label><input type="radio" name="q28" value="wrong" /> في الشبكة الإندوبلازمية / In the endoplasmic reticulum</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 29:</strong> أي مما يلي موجود فقط في الخلايا النباتية؟<br />
+      <strong>Question 29:</strong> Which of the following is found only in plant cells?</p>
+      <div class="options">
+    <label><input type="radio" name="q29" value="correct" /> البلاستيدات الخضراء / Chloroplasts</label>
+<label><input type="radio" name="q29" value="wrong" /> الميتوكوندريا / Mitochondria</label>
+<label><input type="radio" name="q29" value="wrong" /> الريبوسومات / Ribosomes</label>
+<label><input type="radio" name="q29" value="wrong" /> النواة / Nucleus</label>
+</div>
+</div>
+
+    <div class="question">
+      <p><strong>السؤال 30:</strong> ما هي وظيفة جهاز غولجي؟<br />
+      <strong>Question 30:</strong> What is the function of the Golgi apparatus?</p>
+      <div class="options">
+    <label><input type="radio" name="q30" value="correct" /> تعديل وتغليف البروتينات / Modify and package proteins</label>
+<label><input type="radio" name="q30" value="wrong" /> إنتاج الطاقة / Produce energy</label>
+<label><input type="radio" name="q30" value="wrong" /> تخزين الماء / Store water</label>
+<label><input type="radio" name="q30" value="wrong" /> نقل الإشارات / Signal transmission</label>
+</div>
+</div>
+
+  <input type="button" value="تقييم الإجابات / Submit Answers" onclick="checkAnswers()" />
+</form>
+<script>
+function checkAnswers() {
+  const form = document.getElementById('quizForm');
+  let correctCount = 0;
+  const total = 30;
+  for (let i = 1; i <= total; i++) {
+    const radios = form['q' + i];
+    if (!radios) continue;
+    for (let r of radios) {
+      if (r.checked && r.value === 'correct') {
+        correctCount++;
+      }
+    }
+  }
+  alert(`لقد أجبت بشكل صحيح على ${correctCount} من أصل ${total} سؤالاً.`);
+}
+</script>
+</body>
+</html>
