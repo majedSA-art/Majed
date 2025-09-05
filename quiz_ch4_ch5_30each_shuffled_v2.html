@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang='ar'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>اختبار تفاعلي — الفصل الرابع والخامس (30 سؤال لكل فصل)</title>
+  <style>
+    body{font-family: Arial, Helvetica, sans-serif; margin:18px; color:#111; background:#fff; line-height:1.55;}
+    h1{margin:0 0 6px;}
+    .note{margin:0 0 16px; color:#333;}
+    .chapter{border:2px solid #eee; border-radius:12px; padding:12px; margin-bottom:18px;}
+    .chead{display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; align-items:center; margin-bottom:8px;}
+    .q{border:1px solid #e5e5e5; border-radius:10px; padding:10px; margin:10px 0;}
+    .qtext{font-weight:700; margin-bottom:6px;}
+    .opt{display:block; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:8px; background:#fafafa; cursor:pointer;}
+    .opt:hover{background:#f0f0f0;}
+    .opt.correct{background:#d4edda !important; border-color:#c3e6cb; color:#155724; font-weight:700;}
+    .opt.incorrect{background:#f8d7da !important; border-color:#f5c6cb; color:#721c24;}
+    .btn{padding:8px 12px; border:none; border-radius:8px; background:#007bff; color:#fff; cursor:pointer;}
+    .score{font-weight:700; margin-left:8px;}
+    .footer{margin-top:10px; font-size:0.9em; color:#444;}
+  </style>
+</head>
+<body>
+<h1>اختبار تفاعلي — 30 سؤال لكل فصل</h1>
+<p class='note'>اضغط على الإجابة الصحيحة لتتحول إلى <strong style='color:green'>أخضر</strong>، والخاطئة تتحول <strong style='color:#c00'>أحمر</strong> وتظهر الصحيحة تلقائيًا. استخدم أزرار «عرض الدرجة» لكل فصل وللإجمالي.</p>
+<div style='margin:8px 0;'><button id='allScore' class='btn'>عرض الدرجة الإجمالية</button> <span id='allScoreOut' class='score'></span></div>
+<div class='chapter' id='chap1'>
+  <div class='chead'><h2>الفصل الرابع — تاريخ الأردن الحديث (المملكة الأولى/الثانية/الثالثة) | Chapter 4 – Modern Jordan History</h2> <div><button class='btn chapScore' data-chap='chap1'>عرض درجة هذا الفصل</button> <span class='score' id='chap1_score'></span></div></div>
+  <div class='q' data-chap='chap1' data-q='1'>
+    <div class='qtext'>1. ما تاريخ استقلال المملكة الأردنية الهاشمية؟</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 25 أيار 1946</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 22 آذار 1946</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 7 شباط 1946</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 20 تموز 1951</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='2'>
+    <div class='qtext'>2. المعاهدة الأردنية البريطانية عام 1946 نصّت على:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) تحالف وصداقة ووجود قوات بريطانية بشرق الأردن</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) انسحاب كامل لكل القوات الأجنبية فوراً</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) إلغاء التمثيل الدبلوماسي</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) عدم التشاور في حال النزاع</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='3'>
+    <div class='qtext'>3. قسّمت مراحل الاستقلال في الأردن إلى:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) أربع مراحل تنتهي بحكم الملك عبدالله الثاني</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) مرحلتين فقط</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) ثلاث مراحل تنتهي 1952</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) مرحلة واحدة فقط</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='4'>
+    <div class='qtext'>4. من هو أول سفير بريطاني في الأردن بعد المعاهدة؟</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) أليك كيركبرايد</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) لورنس العرب</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) إيدن</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) تشرشل</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='5'>
+    <div class='qtext'>5. من نتائج مؤتمر أريحا 1948:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) المناداة بوحدة الضفتين ومبايعة الملك عبدالله</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) الانفصال التام بين الضفتين</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) رفض العودة للاجئين</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء المجلس النيابي</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='6'>
+    <div class='qtext'>6. وحدة الضفتين أُقرّت نهائياً عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 1950</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 1946</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 1953</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 1967</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='7'>
+    <div class='qtext'>7. سبب رئيس لهزيمة العرب عام 1948 (النكبة):</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) تعدد القيادات وغياب خطة موحدة</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) تفوق عددي عربي كاسح</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) تفكك القوات الصهيونية</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) حظر جوي على إسرائيل</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='8'>
+    <div class='qtext'>8. مشروع الأمير عبدالله 1938 حول فلسطين تضمن:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) مملكة عربية موحدة بفلسطين وشرق الأردن</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) تقسيم فلسطين إلى ثلاث دول</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) تهجير اليهود إجبارياً</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء التمثيل البرلماني</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='9'>
+    <div class='qtext'>9. الملك المؤسس عبدالله الأول استشهد عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 1951 في المسجد الأقصى</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 1946 في عمّان</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 1953 في القدس</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 1967 في عمّان</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='10'>
+    <div class='qtext'>10. ملِك الأردن بين 1951–1952 هو:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) الملك طلال بن الحسين</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) الملك حسين بن طلال</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) الملك عبدالله الثاني</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) الأمير فيصل</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='11'>
+    <div class='qtext'>11. إنجاز مهم في عهد الملك طلال:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) وضع دستور 1952 الديمقراطي</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) إنهاء المعاهدة 1957</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) تعريب الجيش 1956</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) اتفاقية السلام</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='12'>
+    <div class='qtext'>12. تسلّم الملك الحسين سلطاته الدستورية في:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 2 أيار 1953</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 1 آذار 1956</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 22 آذار 1946</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 7 شباط 1999</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='13'>
+    <div class='qtext'>13. تعريب قيادة الجيش الأردني (إقالة كلوب) كان عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 1956</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 1957</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 1967</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 1968</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='14'>
+    <div class='qtext'>14. إلغاء المعاهدة الأردنية البريطانية تم عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 1957</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 1956</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 1946</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 1970</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='15'>
+    <div class='qtext'>15. الاتحاد العربي (كونفدرالي) بين الأردن والعراق أُعلن عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 1958 ولم يدم طويلاً</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 1963 واستمر عقداً</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 1948 واستمر 5 سنوات</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 1972 حتى 1988</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='16'>
+    <div class='qtext'>16. أحد أسباب حرب 1967:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) إغلاق مصر مضيق تيران وتحويل مياه نهر الأردن</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) سحب جيوش إسرائيل إلى الداخل</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) اعتراف إسرائيل بدولة فلسطينية</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) تفوق عربي جوي ساحق</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='17'>
+    <div class='qtext'>17. من نتائج حرب 1967:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) خسارة الضفة الغربية ونزوح واسع وقرار 242</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) تحرير سيناء فوراً</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) تفكك الجيش الإسرائيلي</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء مجلس الأمن</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='18'>
+    <div class='qtext'>18. قائد معركة الكرامة 1968:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) اللواء مشهور حديثة الجازي</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) راضي عناب</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) حابس المجالي</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) أحمد عبيدات</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='19'>
+    <div class='qtext'>19. نتيجة معركة الكرامة كانت:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) نصر أردني رفع المعنويات العربية</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) هزيمة أردنية ساحقة</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) هدنة طويلة</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) انسحاب أردني من عمان</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='20'>
+    <div class='qtext'>20. حرب الاستنزاف (1968–1970) انتهت بـ:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) مبادرة روجرز وهدنة</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) اتفاقية سلام شامل</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) ضم الضفة الغربية للأردن</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) انسحاب إسرائيلي كامل</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='21'>
+    <div class='qtext'>21. مشاركة الأردن في حرب تشرين 1973 كانت عبر:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) إرسال اللواء المدرع 40 إلى الجبهة السورية</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) قطع العلاقات مع سوريا</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) حصار بحري</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) انسحاب من الجبهة</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='22'>
+    <div class='qtext'>22. مشروع المملكة العربية المتحدة 1972 تضمّن:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) كيانين: قطر الأردن وقطر فلسطين بعاصمة عمّان والقدس</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) إلغاء الملكية</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) ضم لبنان</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) جيشين منفصلين بلا تنسيق</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='23'>
+    <div class='qtext'>23. قرار فك الارتباط القانوني والإداري مع الضفة الغربية صدر عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 1988</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 1972</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 1994</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 1974</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='24'>
+    <div class='qtext'>24. مؤتمر الرباط 1974 قرّر:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) منظمة التحرير ممثلاً شرعياً وحيداً للشعب الفلسطيني</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) وحدة أردنية فلسطينية فورية</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) حل جامعة الدول العربية</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء قرارات 242</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='25'>
+    <div class='qtext'>25. الحياة النيابية عُطِّلت جزئياً بعد 1967 بسبب:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) ظروف الاحتلال في الضفة الغربية</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) حلّ الدستور نهائياً</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) حلّ الملكية</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء الحكومة</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='26'>
+    <div class='qtext'>26. المجلس الوطني الاستشاري شُكّل عام 1978 بهدف:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) سد الفراغ التشريعي وإسداء المشورة</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) تأسيس جيش بديل</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) إدارة البلديات</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) الإشراف على القضاء</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='27'>
+    <div class='qtext'>27. تعطلت الحياة الحزبية بين:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 1957–1989</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 1946–1950</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 1999–2004</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 2011–2012</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='28'>
+    <div class='qtext'>28. سمات الأحزاب في تلك الفترة المتأخرة:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) ضعف وانقسامات وبروز الأبعاد الشخصية</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) قوة تنظيمية ووحدة كاملة</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) حظر المرأة والشباب</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) تحالف قاري</div>
+  </div>
+  <div class='q' data-chap='chap1' data-q='29'>
+    <div class='qtext'>29. من مرتكزات سياسة الأردن العربية في عهد الحسين:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) الوحدة العربية والعمل المشترك واحترام سيادة الدول</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) الانزواء والقطيعة</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) رفض أي تعاون اقتصادي</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء الدبلوماسية</div>
+  </div>
+  <div class='footer'>نصيحة: أجب على أسئلة هذا الفصل ثم اضغط «عرض درجة هذا الفصل» لحساب نتيجتك.</div>
+</div>
+<div class='chapter' id='chap2'>
+  <div class='chead'><h2>الفصل الخامس — المملكة الرابعة (1999–2024) | Chapter 5 – The Fourth Kingdom Era</h2> <div><button class='btn chapScore' data-chap='chap2'>عرض درجة هذا الفصل</button> <span class='score' id='chap2_score'></span></div></div>
+  <div class='q' data-chap='chap2' data-q='1'>
+    <div class='qtext'>1. تولّى الملك عبدالله الثاني سلطاته الدستورية عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 1999</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 1995</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 2001</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 2011</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='2'>
+    <div class='qtext'>2. أحد أبرز التحديات الاقتصادية:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) العجز والمديونية والبطالة</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) وفرة الموارد الطبيعية الكبيرة</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) فائض تجاري ضخم دائم</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) انكماش سكاني حاد</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='3'>
+    <div class='qtext'>3. التحدي الأمني بعد 2001 تمثّل في:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) مواجهة الإرهاب والعمليات والتسلل</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) انسحاب الأجهزة الأمنية</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) حلّ الجيش</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء التحالفات الدولية</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='4'>
+    <div class='qtext'>4. تفجيرات عمّان الإرهابية وقعت عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 2005 واستشهد نحو 60 شخصاً</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 2011 واستشهد 5</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 2003 واستشهد 200</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 2016 بلا إصابات</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='5'>
+    <div class='qtext'>5. مبادرة عالمية لتصحيح صورة الإسلام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) رسالة عمّان 2004</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) إعلان بغداد 2007</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) وثيقة الدوحة 2010</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) ميثاق الرباط 2001</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='6'>
+    <div class='qtext'>6. أحد تحديات الإقليم:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) الغزو الأميركي للعراق 2003 وتداعياته</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) انهيار الاتحاد الأوروبي</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) زلازل أوروبا</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) توحيد كوريا</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='7'>
+    <div class='qtext'>7. تحدي اللجوء أبرزُه استقبال:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) نحو 1.3 مليون سوري بعد 2011</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 10 آلاف لاجئ فقط</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) لا يستقبل الأردن لاجئين</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) مليون لاجئ من اليابان</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='8'>
+    <div class='qtext'>8. منطقة اقتصادية خاصة أُنشئت عام 2001:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) منطقة العقبة الاقتصادية</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) منطقة الزرقاء الحرة</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) منطقة الرمثا الصناعية</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) منطقة عجلون الخضراء</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='9'>
+    <div class='qtext'>9. من أبرز الأحداث 2011 داخلياً:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) تعديلات دستورية وإنشاء المحكمة الدستورية لاحقاً</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) تعليق الانتخابات كلياً</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) إلغاء القضاء</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) حلّ البلديات</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='10'>
+    <div class='qtext'>10. الهيئة المستقلة للانتخاب تأسست عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 2012</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 2005</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 1999</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 2020</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='11'>
+    <div class='qtext'>11. أوراق نقاشية ملكية هدفت إلى:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) توسيع النقاش حول الإصلاح السياسي</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) إلغاء الدستور</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) وقف الانتخابات</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) خصخصة القضاء</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='12'>
+    <div class='qtext'>12. قانون اللامركزية صدر عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 2015</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 2008</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 2021</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 2001</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='13'>
+    <div class='qtext'>13. في 6 تشرين الثاني 2023 الأردن:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) نفّذ أول إنزال إغاثي طبي إلى غزة</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) وقع معاهدة جديدة</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) أغلق الموانئ</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) حلّ البرلمان</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='14'>
+    <div class='qtext'>14. اللجنة الملكية لتحديث المنظومة السياسية شُكّلت عام:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 2021</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 2011</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 2004</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 2016</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='15'>
+    <div class='qtext'>15. قانون الانتخاب لسنة 2022 اعتمد:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) نظاماً مختلطاً (محلي + دائرة عامة حزبية)</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) صوتاً واحداً للدائرة فقط</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) تمثيلاً حزبياً صفراً</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء الكوتا النسائية</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='16'>
+    <div class='qtext'>16. القانون رفع تمثيل الأحزاب تدريجياً حتى:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 65% كحد أدنى لمجلس 22</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 25%</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 10%</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 100%</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='17'>
+    <div class='qtext'>17. قانون الأحزاب 2022 اشترط للمؤسسين:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 1000 عضو من 6 محافظات بحد أدنى</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 100 عضو فقط</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 50 عضواً من محافظة واحدة</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 2000 عضو من محافظة واحدة</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='18'>
+    <div class='qtext'>18. خفض سن الترشح النيابي إلى:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 25 سنة</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 30 سنة</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 21 سنة</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 35 سنة</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='19'>
+    <div class='qtext'>19. صدمة خارجية كبرى أثّرت 2009–2010:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) الأزمة المالية العالمية وتراجع النمو</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) ارتفاع أسعار الفوسفات فقط</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) انتعاش دائم للصادرات</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) انخفاض الدين العام للنصف</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='20'>
+    <div class='qtext'>20. أزمة الغاز المصري أدت إلى:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) خسائر كبيرة لشركة الكهرباء الوطنية</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) فائض مالي</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) توقف التوليد بالكامل</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء الشبكة</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='21'>
+    <div class='qtext'>21. إغلاق الحدود مع سوريا والعراق منتصف 2014 أثّر على:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) الصادرات وخسائر بالتجارة</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) زيادة السياحة 100%</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) وفرة العمالة</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) تحسن فوري للنمو</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='22'>
+    <div class='qtext'>22. عام 2020 شهد الاقتصاد:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) انكماشاً بسبب جائحة كورونا</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) نموّاً غير مسبوق 10%</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) ثباتاً دون تغيير</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) تضخماً صفرياً مع نمو عال</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='23'>
+    <div class='qtext'>23. قطاع تكنولوجيا المعلومات بعد 1999:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) صار رافداً رئيسياً ونما عدد الشركات لآلاف</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) اختفى تماماً</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) لا صادرات له</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) لا أثر على ريادة الأعمال</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='24'>
+    <div class='qtext'>24. قطاع السياحة 2019:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) حقق ذروة في عدد السياح والدخل قبل الجائحة</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) توقف كلياً</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) انخفض للنصف بسبب حرب 2003</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) انتهى كقطاع</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='25'>
+    <div class='qtext'>25. رؤية التحديث الاقتصادي أُطلقت في:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) 2022 (366 مبادرة وثمانية محرّكات نمو)</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) 2010</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) 2001</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) 2024</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='26'>
+    <div class='qtext'>26. مشاريع المياه الاستراتيجية شملت:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) ناقل الديسي ومشروع الناقل الوطني</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) إلغاء السدود</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) تحلية نهر الأردن</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إغلاق الآبار جميعها</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='27'>
+    <div class='qtext'>27. رؤية التعليم ركزت على:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) الطفولة المبكرة، الحوسبة، التعليم المهني</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) إلغاء الإنجليزية</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) منع التعليم المستمر</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء تدريب المعلمين</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='28'>
+    <div class='qtext'>28. مبادرات تعليمية ومجتمعية بارزة:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) جائزة الملكة رانيا، مبادرة مدرستي، مؤسسة الملكة رانيا</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) إلغاء الجوائز التعليمية</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) إغلاق المدارس</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) منع المبادرات</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='29'>
+    <div class='qtext'>29. التحدي الإسرائيلي المتصاعد يرتبط بـ:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) الاستيطان وجدار الفصل وخطط ضم الأغوار</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) تفكيك المستوطنات جميعاً</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) اعتراف فوري بدولة فلسطينية</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء الجدار 2002</div>
+  </div>
+  <div class='q' data-chap='chap2' data-q='30'>
+    <div class='qtext'>30. نهج الدولة داخلياً في العهد الرابع يعتمد على:</div>
+    <div class='opt' data-correct='true' tabindex='0'>a) الاستقرار، الإصلاح التدريجي، سيادة القانون</div>
+    <div class='opt' data-correct='false' tabindex='0'>b) القطيعة مع المجتمع</div>
+    <div class='opt' data-correct='false' tabindex='0'>c) تعليق الانتخابات دائماً</div>
+    <div class='opt' data-correct='false' tabindex='0'>d) إلغاء المؤسسات الحقوقية</div>
+  </div>
+  <div class='footer'>نصيحة: أجب على أسئلة هذا الفصل ثم اضغط «عرض درجة هذا الفصل» لحساب نتيجتك.</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+
+  // ---- Shuffle options per question on each load (safe) ----
+  function shuffleArray(arr){
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+  function relabelOptions(qdiv){
+    const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    const opts = qdiv.querySelectorAll('.opt');
+    opts.forEach((o, idx) => {
+      // Keep inner text after the first ")"
+      const html = o.innerHTML;
+      const splitIdx = html.indexOf(')');
+      const rest = splitIdx >= 0 ? html.slice(splitIdx + 1).trim() : html;
+      o.innerHTML = letters[idx] + ') ' + rest;
+    });
+  }
+  function shuffleOptions(){
+    document.querySelectorAll('.q').forEach(q => {
+      const opts = Array.from(q.querySelectorAll('.opt'));
+      if (opts.length < 2) return;
+      const shuffled = shuffleArray(opts.slice());
+      // Append in new order (moves nodes without cloning)
+      shuffled.forEach(node => q.appendChild(node));
+      relabelOptions(q);
+    });
+  }
+  // Run shuffle before binding listeners
+  shuffleOptions();
+
+  function markOption(e){
+    const opt = e.currentTarget;
+    const qdiv = opt.closest('.q');
+    if (qdiv.dataset.answered === 'true') return;
+    qdiv.dataset.answered = 'true';
+    const opts = qdiv.querySelectorAll('.opt');
+    if (opt.dataset.correct === 'true'){
+      opt.classList.add('correct');
+    } else {
+      opt.classList.add('incorrect');
+      opts.forEach(o => { if (o.dataset.correct === 'true') o.classList.add('correct'); });
+    }
+    opts.forEach(o => { o.style.pointerEvents = 'none'; });
+  }
+  document.querySelectorAll('.opt').forEach(o => {
+    o.addEventListener('click', markOption);
+    o.addEventListener('keydown', (e)=>{
+      if (e.key==='Enter' || e.key===' ') { e.preventDefault(); markOption(e); }
+    });
+  });
+
+  document.querySelectorAll('.chapScore').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const chapId = btn.dataset.chap;
+      const qs = document.querySelectorAll('#'+chapId+' .q');
+      let correct = 0;
+      qs.forEach(q => {
+        const cor = q.querySelector('.opt[data-correct="true"]');
+        if (cor && cor.classList.contains('correct')) correct++;
+      });
+      document.getElementById(chapId+'_score').textContent = ' '+correct+' / '+qs.length;
+    });
+  });
+
+  document.getElementById('allScore').addEventListener('click', () => {
+    const qs = document.querySelectorAll('.q');
+    let correct = 0;
+    qs.forEach(q => {
+      const cor = q.querySelector('.opt[data-correct="true"]');
+      if (cor && cor.classList.contains('correct')) correct++;
+    });
+    document.getElementById('allScoreOut').textContent = ' '+correct+' / '+qs.length;
+  });
+});
+</script>
+
+</body></html>
