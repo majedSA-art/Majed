@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urinary System Quiz - Compat</title>
+<style>
+ body{font-family:Arial,Helvetica,sans-serif;background:#f7f9fc;margin:0;padding:16px;color:#222}
+ .box{max-width:900px;margin:0 auto}
+ h1{text-align:center;margin:8px 0 16px;font-size:20px}
+ .hud{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
+ .pill{background:#eef;border-radius:999px;padding:6px 10px}
+ .q{background:#fff;border:1px solid #e6e6e6;border-radius:10px;padding:14px;margin:10px 0}
+ .q h3{margin:0 0 8px;font-size:16px}
+ .opt{display:block;width:100%;text-align:right;margin:6px 0;padding:10px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer}
+ .opt.c{background:#c8e6c9;border-color:#8bc34a}
+ .opt.w{background:#ffcdd2;border-color:#ef9a9a}
+ .exp{display:none;margin-top:8px;background:#eaf4ff;border-right:4px solid #2196f3;padding:8px;border-radius:8px}
+ .exp.show{display:block}
+ .nav{display:flex;gap:8px;justify-content:space-between;margin-top:8px}
+ button{padding:10px 14px;border:none;border-radius:8px;color:#fff;cursor:pointer}
+ .prev{background:#ff7043}.next{background:#4caf50}.prev:disabled,.next:disabled{background:#bbb}
+ .done{text-align:center;background:#fff;border:1px solid #e6e6e6;border-radius:10px;padding:16px;margin-top:12px;display:none}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>🚰 Urinary System — Quiz (Compat)</h1>
+<div class="hud">
+  <div class="pill">السؤال: <span id="cur">1</span> / <span id="tot">30</span></div>
+  <div class="pill">✅ صحيحة: <span id="ok">0</span></div>
+  <div class="pill">❌ خاطئة: <span id="bad">0</span></div>
+  <div class="pill">⏰ <span id="t">00:00</span></div>
+</div>
+
+<div id="wrap"></div>
+<div id="done" class="done">
+  <h2>🎉 انتهى الاختبار</h2>
+  <p>نتيجتك: <b id="sc">0%</b> — صحيحة: <b id="ok2">0</b> | خاطئة: <b id="bad2">0</b></p>
+</div>
+</div>
+
+<script>
+var Q = [
+ {q:"Which organs belong to the urinary system? / ما الأعضاء المكوّنة للجهاز البولي؟",a:["Kidneys, ureters, urinary bladder, urethra / الكليتان والحالبان والمثانة والإحليل","Liver, pancreas, gallbladder / الكبد والبنكرياس والمرارة","Spleen, thymus, tonsils / الطحال والتيموس واللوزتان","Lungs, bronchi, alveoli / الرئتان والقصبات والحويصلات"],c:0,e:"الجهاز البولي يضم الكليتين، الحالبين، المثانة، والإحليل."},
+ {q:"Main function of kidneys? / الوظيفة الأساسية للكليتين؟",a:["Filter blood and form urine / ترشيح الدم وتكوين البول","Produce bile / إنتاج الصفراء","Digest proteins / هضم البروتين","Store vitamins / تخزين الفيتامينات"],c:0,e:"الكليتان ترشحان الدم وتحولان الراشح إلى بول."},
+ {q:"Urinary bladder function? / وظيفة المثانة البولية؟",a:["Storage of urine / تخزين البول","Produce insulin / إنتاج الأنسولين","Secrete EPO / إفراز الإريثروبويتين","Filter plasma / ترشيح البلازما"],c:0,e:"المثانة خزان عضلي قابل للتمدد."},
+ {q:"Kidneys regulate blood volume by / تنظيم حجم الدم يتم عبر:",a:["Controlling interstitial fluid under hormones / ضبط سائل الأنسجة بتأثير هرمونات","Producing bile","Making antibodies","Secreting digestive enzymes"],c:0,e:"الكلى تعدّل حجم السائل الخلالي والدم بتوجيه هرموني."},
+ {q:"Kidneys sense blood oxygen and release / الكليتان تطلقان:",a:["Erythropoietin (EPO) / الإريثروبويتين","Insulin","TSH","ADH"],c:0,e:"EPO يحرّض إنتاج الكريات الحمراء."},
+ {q:"Renal sinus houses / الجيب الكلوي يحتوي:",a:["Renal pelvis, calyces, vessels, nerves, fat","Only cortex","Only medulla","Only pyramids"],c:0,e:"الجيب يضم الحوض والكؤيسات وبنى وعائية وعصبية."},
+ {q:"Cortex vs medulla / القشر مقابل اللب:",a:["Cortex peripheral; medulla with pyramids","Cortex central; medulla peripheral","Both identical","Medulla makes capsule"],c:0,e:"القشر محيطي والأهرام ضمن اللب."},
+ {q:"Renal pyramids per kidney / عدد الأهرام:",a:["8–15","1–3","20–30","40–50"],c:0,e:"بين 8 و15."},
+ {q:"Apex of renal pyramid / قمة الهرم:",a:["Renal papilla / الحلمة الكلوية","Calyx","Pelvis","Hilum"],c:0,e:"الحلمة الكلوية تتجه نحو الكؤيسات."},
+ {q:"Urine collects in the / يتجمع البول في:",a:["Renal pelvis then ureter","Bowman's capsule","Peritubular capillaries","Renal cortex"],c:0,e:"الحوض الكلوي قبل الحالب."},
+ {q:"Functional filtration unit / الوحدة الوظيفية:",a:["Nephron / الكليون","Glomerulus","Collecting duct","Calyx"],c:0,e:"الكليون وحدة الكلية."},
+ {q:"Each nephron includes / يتكوّن الكليون من:",a:["Renal corpuscle + tubule","Only glomerulus","Only PCT","Only loop of Henle"],c:0,e:"جسيم كلوي + أنبوب."},
+ {q:"Renal corpuscle consists of / الجسيم الكلوي:",a:["Glomerulus & Bowman's capsule","PCT & DCT","Loop only","Collecting duct"],c:0,e:"كبيبة + محفظة بومان."},
+ {q:"Filtration occurs at / الترشيح يحدث في:",a:["Renal corpuscle","PCT","Loop of Henle","DCT"],c:0,e:"من الدم إلى اللمعة."},
+ {q:"Most reabsorption at / معظم إعادة الامتصاص:",a:["PCT","DCT","Collecting duct","Renal pelvis"],c:0,e:"معظمها في الأنبوب القريب."},
+ {q:"Secretion mainly at / الإفراز أساسًا في:",a:["DCT","PCT","Glomerulus","Pelvis"],c:0,e:"الإفراز من الدم إلى اللمعة في البعيد."},
+ {q:"Ureters conduct urine from / الحالبان ينقلان البول من:",a:["Renal pelvis to bladder","Bladder to kidney","Urethra to bladder","Cortex to medulla"],c:0,e:"من الحوض إلى المثانة."},
+ {q:"Average ureter length / طول الحالب:",a:["~25 cm","~5 cm","~60 cm","~100 cm"],c:0,e:"حوالي 25 سم."},
+ {q:"Ureters are / موقع الحالبين:",a:["Retroperitoneal","Intraperitoneal","Submucosal","Intrathoracic"],c:0,e:"خلف بريتواني."},
+ {q:"Bladder muscle called / عضلة المثانة:",a:["Detrusor muscle","Psoas","Diaphragm","Soleus"],c:0,e:"عضلة ديتروسور الملساء."},
+ {q:"Detrusor layers / طبقات الديتروسور:",a:["Inner/outer longitudinal + middle circular","Only circular","Only longitudinal","Skeletal fibers"],c:0,e:"ثلاث طبقات: طولية/دائرية/طولية."},
+ {q:"Bladder mucosa shows / مخاطية المثانة:",a:["Rugae that disappear when filled","Cilia","Villi","Keratinized epithelium"],c:0,e:"طيات تزول بالامتلاء."},
+ {q:"Trigone is / مثلث المثانة:",a:["Triangle between ureter openings and urethra","Muscle at neck","Mucosal fold","Part of urethra"],c:0,e:"منطقة ملساء تقود البول."},
+ {q:"Neck of bladder contains / عنق المثانة:",a:["Internal urethral sphincter","External sphincter","Valve","Ligament"],c:0,e:"المصرة الداخلية."},
+ {q:"Urethra function / وظيفة الإحليل:",a:["Conduct urine to exterior","Store urine","Filter blood","Secrete hormones"],c:0,e:"قناة طرح البول."},
+ {q:"Loop of Henle has / عروة هنلي:",a:["Descending & ascending limbs","Only descending","Only ascending","No loop"],c:0,e:"ذراعان نازل وصاعد."},
+ {q:"Collecting ducts role / القنوات الجامعة:",a:["Receive fluid from nephrons","Filter blood","Produce EPO","Form capsule"],c:0,e:"تنقل الراشح نحو الحليمات."},
+ {q:"Renal hilum is / نقير الكلية:",a:["Medial concavity for vessels & pelvis","Cortex edge","Papilla apex","Loop region"],c:0,e:"بوابة الأوعية والحوض."},
+ {q:"Kidney dimensions approx / أبعاد الكلية:",a:["10×5.5×3 cm","3×2×1 cm","20×10×6 cm","1×1×1 cm"],c:0,e:"قرابة 10×5.5×3 سم."},
+ {q:"Total nephrons both kidneys / عدد الكليون:",a:["~2.5 million","~25 thousand","~250 million","~2 thousand"],c:0,e:"حوالي 2.5 مليون."}
+];
+var i=0, ok=0, bad=0;
+var t0=new Date();
+var timer=setInterval(function(){
+  var s=Math.floor((new Date()-t0)/1000);
+  var m=('0'+Math.floor(s/60)).slice(-2);
+  var ss=('0'+(s%60)).slice(-2);
+  document.getElementById('t').textContent=m+":"+ss;
+},1000);
+document.getElementById('tot').textContent=Q.length;
+function renderQ(){
+  var x=Q[i], html="";
+  html += '<div class="q"><h3>س'+(i+1)+'/'+Q.length+' — '+x.q+'</h3>';
+  for(var k=0;k<x.a.length;k++){
+    html+='<button class="opt" onclick="pick('+k+')">'+String.fromCharCode(65+k)+'. '+x.a[k]+'</button>';
+  }
+  html+='<div id="e" class="exp">💡 '+x.e+'</div>';
+  html+='<div class="nav">';
+  html+='<button class="prev" onclick="prev()" '+(i===0?'disabled':'')+'>السابق</button>';
+  html+='<button class="next" id="n" onclick="next()" disabled>'+(i===Q.length-1?'إنهاء':'التالي')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+function mount(){ document.getElementById('wrap').innerHTML=renderQ(); }
+function pick(k){
+  var x=Q[i];
+  var btns=document.getElementsByClassName('opt');
+  for(var b=0;b<btns.length;b++){
+    btns[b].onclick=null;
+    if(b===x.c) btns[b].className+=' c';
+    if(b===k && b!==x.c) btns[b].className+=' w';
+  }
+  if(k===x.c) ok++; else bad++;
+  document.getElementById('e').className+=' show';
+  document.getElementById('n').disabled=false;
+  document.getElementById('ok').textContent=ok;
+  document.getElementById('bad').textContent=bad;
+  document.getElementById('cur').textContent=i+1;
+}
+function next(){
+  if(i<Q.length-1){ i++; mount(); }
+  else {
+    clearInterval(timer);
+    document.getElementById('wrap').style.display='none';
+    document.getElementById('done').style.display='block';
+    var pct=Math.round(ok/Q.length*100);
+    document.getElementById('sc').textContent=pct+'%';
+    document.getElementById('ok2').textContent=ok;
+    document.getElementById('bad2').textContent=bad;
+  }
+}
+function prev(){ if(i>0){ i--; mount(); } }
+mount();
+</script>
+</body>
+</html>
