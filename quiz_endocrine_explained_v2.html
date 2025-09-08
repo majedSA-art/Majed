@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧠 اختبار الجهاز الصماوي التفاعلي - مع توضيح</title>
+<style>
+  body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px;color:#333}
+  .container{max-width:1000px;margin:0 auto}
+  .header{text-align:center;color:#fff;margin-bottom:24px}
+  .header h1{margin:6px 0 2px}
+  .quiz-controls{background:rgba(255,255,255,.95);padding:16px;border-radius:14px;margin-bottom:16px}
+  .row{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+  .pill{background:#eef;border-radius:999px;padding:6px 12px;font-weight:600;color:#334}
+  .progress-bar{height:10px;background:#e0e0e0;border-radius:6px;overflow:hidden}
+  .progress{height:100%;background:#4caf50;width:0%;transition:width .4s}
+  .question-container{background:#fff;padding:18px;border-radius:14px;margin-bottom:16px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
+  .question-header{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .qnum{background:#667eea;color:#fff;border-radius:999px;padding:6px 12px;font-weight:700}
+  .diff{border-radius:999px;padding:6px 12px;font-weight:700}
+  .easy{background:#c8e6c9;color:#2e7d32}.medium{background:#fff3cd;color:#8a6d3b}.hard{background:#f8d7da;color:#842029}
+  .qtext{font-size:1.2rem;font-weight:700;margin:8px 0 14px;text-align:center;background:#f8f9fa;border-right:4px solid #667eea;border-radius:10px;padding:10px}
+  .answers{display:grid;gap:10px}
+  .option{padding:14px;border:2px solid #e0e0e0;border-radius:10px;cursor:pointer;background:linear-gradient(135deg,#fff,#fafafa);transition:.25s;font-weight:600}
+  .option:hover{border-color:#667eea;transform:translateX(-3px)}
+  .option.correct{background:#4caf50;color:#fff;border-color:#4caf50}
+  .option.incorrect{background:#ef5350;color:#fff;border-color:#ef5350}
+  .explain{display:none;margin-top:12px;background:linear-gradient(135deg,#e3f2fd,#f1f8e9);border-right:4px solid #2196f3;border-radius:10px;padding:12px}
+  .explain.show{display:block}
+  .navigation{display:flex;justify-content:space-between;gap:10px;margin-top:12px}
+  .btn{border:none;border-radius:10px;padding:10px 18px;color:#fff;cursor:pointer;font-weight:700}
+  .prev{background:#ff7043}.next{background:#4caf50}.btn:disabled{background:#bbb;cursor:not-allowed}
+  .results{display:none;background:#fff;padding:22px;border-radius:14px;text-align:center}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🧠 اختبار الجهاز الصماوي التفاعلي</h1>
+    <p>Interactive Endocrine System Quiz — مع توضيح بعد كل سؤال</p>
+    <div id="timer" class="pill">⏰ الوقت: 00:00</div>
+  </div>
+
+  <div class="quiz-controls">
+    <div class="row">
+      <div class="pill">السؤال: <span id="currentQuestion">1</span> / <span id="totalQuestions">30</span></div>
+      <div class="pill">✅ صحيحة: <span id="correctCount">0</span></div>
+      <div class="pill">❌ خاطئة: <span id="incorrectCount">0</span></div>
+      <div class="pill">📊 النتيجة: <span id="scorePercent">0%</span></div>
+    </div>
+    <div class="progress-bar" style="margin-top:10px"><div id="progressBar" class="progress"></div></div>
+  </div>
+
+  <div id="quizContainer"></div>
+
+  <div id="results" class="results">
+    <h2>🎉 انتهى الاختبار</h2>
+    <p>النتيجة: <b id="finalScore">0%</b></p>
+    <p>صحيحة: <b id="finalCorrect">0</b> | خاطئة: <b id="finalIncorrect">0</b></p>
+    <button class="btn next" onclick="restartQuiz()">🔄 إعادة الاختبار</button>
+  </div>
+</div>
+
+<script>
+const questions=[
+  {q:"Which gland secretes T3 and T4? / أي غدة تفرز هرموني T3 وT4؟",a:["Thyroid / الدرقية","Adrenal / الكظرية","Pituitary / النخامية","Pancreas / البنكرياس"],c:0,d:"easy",e:"الغدة الدرقية تفرز T3 وT4 اللذان ينظمان الأيض في معظم خلايا الجسم."},
+  {q:"What hormone lowers blood calcium? / أي هرمون يخفض الكالسيوم؟",a:["PTH / جار الدرقية","Cortisol / الكورتيزول","Calcitonin / الكالسيتونين","Insulin / الأنسولين"],c:2,d:"medium",e:"الكالسيتونين من الدرقية يخفض كالسيوم الدم عبر تثبيط ارتشاف العظم."},
+  {q:"Which hormone raises calcium from bone? / أي هرمون يسحب الكالسيوم من العظم؟",a:["Estrogen / الإستروجين","PTH / جار الدرقية","GH / هرمون النمو","Calcitonin / الكالسيتونين"],c:1,d:"medium",e:"هرمون PTH يحرّك الكالسيوم من العظام إلى الدم ويزيد امتصاصه كلوياً ومعوياً."},
+  {q:"Which gland is the \"master gland\"? / أي غدة تسمى الغدة الرئيسية؟",a:["Pancreas / البنكرياس","Pituitary / النخامية","Pineal / الصنوبرية","Thyroid / الدرقية"],c:1,d:"easy",e:"النخامية تتحكم في معظم الغدد الصماء عبر هرموناتها المنبهة."},
+  {q:"What hormone regulates sleep cycle? / أي هرمون ينظم دورة النوم؟",a:["TSH","Melatonin / الميلاتونين","Oxytocin","Cortisol"],c:1,d:"easy",e:"الميلاتونين من الصنوبرية ينظم إيقاع النوم/اليقظة ويزداد إطلاقه ليلاً."},
+  {q:"Which part of adrenal secretes cortisol? / أي جزء يفرز الكورتيزول؟",a:["Adrenal medulla / النخاع الكظري","Pituitary / النخامية","Adrenal cortex / قشرة الكظر","Pancreas / البنكرياس"],c:2,d:"medium",e:"قشرة الكظر تفرز الجلوكوكورتيكويدات وأهمها الكورتيزول."},
+  {q:"Which hormone increases glucose uptake? / أي هرمون يزيد دخول الجلوكوز للخلايا؟",a:["Glucagon / الجلوكاجون","Cortisol / الكورتيزول","Insulin / الأنسولين","Epinephrine / الأدرينالين"],c:2,d:"easy",e:"الأنسولين يسهل دخول الجلوكوز إلى الخلايا ويحفّز تخزينه كجلايكوجين."},
+  {q:"Which hormone raises blood glucose? / أي هرمون يرفع سكر الدم؟",a:["Prolactin / البرولاكتين","LH / الهرمون الملوتن","Insulin / الأنسولين","Glucagon / الجلوكاجون"],c:3,d:"easy",e:"الجلوكاجون يحرر الجلوكوز من الكبد عبر تحلل الجلايكوجين واستحداث السكر."},
+  {q:"Which hormone is anti-inflammatory? / أي هرمون مضاد للالتهاب؟",a:["Oxytocin / الأوكسيتوسين","Cortisol / الكورتيزول","FSH / منبه الجريب","Insulin / الأنسولين"],c:1,d:"medium",e:"الكورتيزول له تأثيرات مضادة للالتهاب ومثبطة للمناعة."},
+  {q:"Which hormone stimulates thyroid gland? / أي هرمون يحفز الدرقية؟",a:["ACTH / منبه الكظر","PRL / البرولاكتين","TSH / منبه الدرقية","GH / هرمون النمو"],c:2,d:"medium",e:"TSH من النخامية الأمامية يحفّز الدرقية لإفراز T3/T4."},
+  {q:"Which hormone stimulates adrenal cortex? / أي هرمون يحفز قشرة الكظر؟",a:["ADH / مضاد الإدرار","ACTH / منبه الكظر","Melatonin / الميلاتونين","GH / هرمون النمو"],c:1,d:"hard",e:"ACTH من النخامية الأمامية ينبه قشرة الكظر لإفراز الكورتيزول."},
+  {q:"Which hormone stimulates milk production? / أي هرمون يحفز إنتاج الحليب؟",a:["Estrogen / الإستروجين","Oxytocin / الأوكسيتوسين","Prolactin / البرولاكتين","Cortisol / الكورتيزول"],c:2,d:"easy",e:"البرولاكتين يحفّز تصنيع الحليب في الغدد اللبنية."},
+  {q:"Which hormone causes uterine contractions? / أي هرمون يسبب انقباضات الرحم؟",a:["FSH / منبه الجريب","Oxytocin / الأوكسيتوسين","LH / الهرمون الملوتن","PRL / البرولاكتين"],c:1,d:"medium",e:"الأوكسيتوسين من النخامية الخلفية يعزز تقلص الرحم والحقن اللبني."},
+  {q:"Which hormone conserves water in kidneys? / أي هرمون يحافظ على الماء؟",a:["Cortisol / الكورتيزول","Epinephrine / الأدرينالين","ADH / مضاد الإدرار","GH / هرمون النمو"],c:2,d:"hard",e:"ADH يزيد إعادة امتصاص الماء بالأنابيب الجامعة في الكلى."},
+  {q:"Which hormone regulates Na⁺ & K⁺? / أي هرمون ينظم الصوديوم والبوتاسيوم؟",a:["Epinephrine / الأدرينالين","Aldosterone / الألدوستيرون","PRL / البرولاكتين","Cortisol / الكورتيزول"],c:1,d:"hard",e:"الألدوستيرون يرفع إعادة امتصاص الصوديوم ويزيد طرح البوتاسيوم."},
+  {q:"Which gland secretes melatonin? / أي غدة تفرز الميلاتونين؟",a:["Pituitary / النخامية","Thyroid / الدرقية","Adrenal / الكظرية","Pineal / الصنوبرية"],c:3,d:"medium",e:"الميلاتونين يفرز من الغدة الصنوبرية."},
+  {q:"Which hormone increases HR & BP? / أي هرمون يرفع النبض والضغط؟",a:["TSH / منبه الدرقية","GH / هرمون النمو","Insulin / الأنسولين","Epinephrine / الأدرينالين"],c:3,d:"medium",e:"الإبينفرين يسرّع القلب ويرفع الضغط كجزء من استجابة الكرّ والفرّ."},
+  {q:"Which hormone stimulates sperm production? / أي هرمون يحفز إنتاج النطاف؟",a:["FSH / منبه الجريب","LH / الملوتن","PRL / البرولاكتين","ADH / مضاد الإدرار"],c:0,d:"hard",e:"FSH يحفز الخلايا المنوية على التطور في الخصية."},
+  {q:"Which hormone triggers ovulation? / أي هرمون يطلق الإباضة؟",a:["GH / هرمون النمو","Estrogen / الإستروجين","LH / الملوتن","FSH / منبه الجريب"],c:2,d:"hard",e:"طفرة LH تؤدي إلى الإباضة."},
+  {q:"Which hormone increases female traits? / أي هرمون للصفات الأنثوية؟",a:["Oxytocin / الأوكسيتوسين","Estrogen / الإستروجين","Testosterone / التستوستيرون","Cortisol / الكورتيزول"],c:1,d:"easy",e:"الإستروجين مسؤول عن الصفات الجنسية الأنثوية وتنظيم الدورة."},
+  {q:"Which hormone controls male traits? / أي هرمون للصفات الذكرية؟",a:["Melatonin / الميلاتونين","Estrogen / الإستروجين","Testosterone / التستوستيرون","Cortisol / الكورتيزول"],c:2,d:"easy",e:"التستوستيرون يحدد الصفات الذكرية وإنتاج النطاف."},
+  {q:"Which gland secretes insulin & glucagon? / أي غدة تفرز الأنسولين والجلوكاجون؟",a:["Adrenal / الكظرية","Pancreas / البنكرياس","Pituitary / النخامية","Thyroid / الدرقية"],c:1,d:"easy",e:"جزر لانغرهانس بالبنكرياس: خلايا β أنسولين و α جلوكاجون."},
+  {q:"Which hormone stimulates growth & protein synthesis? / أي هرمون للنمو وتخليق البروتين؟",a:["PRL / البرولاكتين","GH / هرمون النمو","Cortisol / الكورتيزول","Estrogen / الإستروجين"],c:1,d:"medium",e:"GH يعزز تصنيع البروتين ونمو الأنسجة."},
+  {q:"Which hormone is released in stress? / أي هرمون يفرز بالتوتر؟",a:["TSH / منبه الدرقية","Cortisol / الكورتيزول","Oxytocin / الأوكسيتوسين","Estrogen / الإستروجين"],c:1,d:"easy",e:"الكورتيزول يزداد في استجابة التوتر."},
+  {q:"Which gland is at brain base? / أي غدة بقاعدة الدماغ؟",a:["Thyroid / الدرقية","Pituitary / النخامية","Adrenal / الكظرية","Pancreas / البنكرياس"],c:1,d:"easy",e:"النخامية تقع في السرج التركي وتتصل بالوطاء."},
+  {q:"Which gland is in the neck? / أي غدة في الرقبة؟",a:["Pineal / الصنوبرية","Adrenal / الكظرية","Pituitary / النخامية","Thyroid / الدرقية"],c:3,d:"easy",e:"الدرقية أمام الرقبة أسفل الحنجرة."},
+  {q:"Which hormone ejects breast milk? / أي هرمون يقذف الحليب؟",a:["Prolactin / البرولاكتين","Cortisol / الكورتيزول","Oxytocin / الأوكسيتوسين","Estrogen / الإستروجين"],c:2,d:"medium",e:"الأوكسيتوسين يسبب قذف الحليب بانقباض الخلايا حول الأسناخ."},
+  {q:"Which hormones regulate basal metabolism? / من ينظم الأيض الأساس؟",a:["Cortisol / الكورتيزول","GH / هرمون النمو","T3 & T4 / ثلاثي ورباعي يود الثيرونين","Insulin / الأنسولين"],c:2,d:"medium",e:"T3/T4 يحددان سرعة الأيض الأساسي وإنتاج الطاقة."},
+  {q:"Which hormone promotes glycogen storage? / أي هرمون يعزز تخزين الجلايكوجين؟",a:["Glucagon / الجلوكاجون","Insulin / الأنسولين","Epinephrine / الأدرينالين","Cortisol / الكورتيزول"],c:1,d:"medium",e:"الأنسولين يحفّز تصنيع وتخزين الجلايكوجين بالكبد والعضلات."},
+  {q:"Which hormone constricts vessels to raise BP? / أي هرمون يضيّق الأوعية؟",a:["Epinephrine / الأدرينالين","Cortisol / الكورتيزول","GH / هرمون النمو","Norepinephrine / النورأدرينالين"],c:3,d:"hard",e:"النورأدرينالين يسبب تضيق الأوعية وبالتالي رفع الضغط."}
+];
+
+let idx=0, correct=0, incorrect=0, start=null, tInt=null;
+
+function init(){
+  document.getElementById('totalQuestions').textContent=questions.length;
+  start=new Date();
+  tInt=setInterval(()=>{
+    const s=Math.floor((new Date()-start)/1000);
+    const mm=String(Math.floor(s/60)).padStart(2,'0');
+    const ss=String(s%60).padStart(2,'0');
+    document.getElementById('timer').textContent=`⏰ الوقت: ${mm}:${ss}`;
+  },1000);
+  render();
+}
+
+function render(){
+  const q=questions[idx];
+  document.getElementById('currentQuestion').textContent=idx+1;
+  document.getElementById('progressBar').style.width=((idx+1)/questions.length*100)+'%';
+  document.getElementById('quizContainer').innerHTML=`
+    <div class="question-container">
+      <div class="question-header">
+        <div class="qnum">السؤال ${idx+1} / ${questions.length}</div>
+        <div class="diff ${q.d}">${q.d==='easy'?'🟢 سهل':q.d==='medium'?'🟡 متوسط':'🔴 صعب'}</div>
+      </div>
+      <div class="qtext">${q.q}</div>
+      <div class="answers" id="answers">
+        ${q.a.map((ans,i)=>`<div class="option" data-i="${i}" onclick="choose(${i})">${String.fromCharCode(65+i)}. ${ans}</div>`).join('')}
+      </div>
+      <div id="exp" class="explain"><b>💡 التوضيح:</b> <span>${q.e}</span></div>
+      <div class="navigation">
+        <button class="btn prev" onclick="prev()" ${idx===0?'disabled':''}>← السابق</button>
+        <button class="btn next" id="nextBtn" onclick="next()" disabled>${idx===questions.length-1?'🏁 إنهاء':'التالي →'}</button>
+      </div>
+    </div>
+  `;
+  updateStats();
+}
+
+function choose(i){
+  const q=questions[idx];
+  const opts=document.querySelectorAll('.option');
+  opts.forEach(o=>o.onclick=null);
+  opts.forEach((o,k)=>{
+    if(k===q.c) o.classList.add('correct');
+    if(k===i && k!==q.c) o.classList.add('incorrect');
+  });
+  if(i===q.c) correct++; else incorrect++;
+  document.getElementById('exp').classList.add('show');
+  document.getElementById('nextBtn').disabled=false;
+  updateStats();
+}
+
+function next(){
+  if(idx<questions.length-1){ idx++; render(); }
+  else { finish(); }
+}
+
+function prev(){
+  if(idx>0){ idx--; render(); }
+}
+
+function updateStats(){
+  document.getElementById('correctCount').textContent=correct;
+  document.getElementById('incorrectCount').textContent=incorrect;
+  const answered=correct+incorrect;
+  const pct=answered?Math.round(correct/answered*100):0;
+  document.getElementById('scorePercent').textContent=pct+'%';
+}
+
+function finish(){
+  clearInterval(tInt);
+  document.getElementById('quizContainer').style.display='none';
+  const score=Math.round(correct/questions.length*100);
+  document.getElementById('results').style.display='block';
+  document.getElementById('finalScore').textContent=score+'%';
+  document.getElementById('finalCorrect').textContent=correct;
+  document.getElementById('finalIncorrect').textContent=incorrect;
+}
+
+function restartQuiz(){
+  idx=0; correct=0; incorrect=0;
+  document.getElementById('quizContainer').style.display='block';
+  document.getElementById('results').style.display='none';
+  start=new Date();
+  render();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
