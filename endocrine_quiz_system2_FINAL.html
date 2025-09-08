@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧠 اختبار الغدد الصماء - تفاعلي (ثنائي اللغة)</title>
+<style>
+  body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;margin:0;padding:20px;color:#222}
+  .container{max-width:1000px;margin:0 auto}
+  .header{text-align:center;color:#fff;margin-bottom:18px}
+  .header h1{margin:.2em 0}
+  .pill{display:inline-block;background:#eef;border-radius:999px;padding:6px 12px;font-weight:600;color:#334}
+  .panel{background:rgba(255,255,255,.96);backdrop-filter:blur(8px);padding:14px;border-radius:14px;margin-bottom:14px;box-shadow:0 6px 22px rgba(0,0,0,.08)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .progress-bar{height:10px;background:#e0e0e0;border-radius:6px;overflow:hidden}
+  .progress{height:100%;background:#4caf50;width:0%}
+  .qbox{background:#fff;border-radius:14px;padding:16px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
+  .qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .qnum{background:#667eea;color:#fff;border-radius:999px;padding:6px 12px;font-weight:700}
+  .diff{border-radius:999px;padding:6px 12px;font-weight:700}
+  .easy{background:#c8e6c9;color:#2e7d32}.medium{background:#fff3cd;color:#8a6d3b}.hard{background:#f8d7da;color:#842029}
+  .qtext{font-weight:700;line-height:1.6;text-align:center;margin:12px 0;padding:10px;border-right:4px solid #667eea;background:#f8f9fa;border-radius:10px}
+  .answers{display:grid;gap:10px}
+  .opt{padding:12px;border:2px solid #e0e0e0;border-radius:10px;cursor:pointer;background:linear-gradient(135deg,#fff,#fafafa);font-weight:600}
+  .opt:hover{border-color:#667eea;transform:translateX(-3px)}
+  .opt.correct{background:#4caf50;color:#fff;border-color:#4caf50}
+  .opt.incorrect{background:#ef5350;color:#fff;border-color:#ef5350}
+  .explain{display:none;margin-top:10px;background:linear-gradient(135deg,#e3f2fd,#f1f8e9);border-right:4px solid #2196f3;border-radius:10px;padding:10px}
+  .explain.show{display:block}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:10px}
+  .btn{border:none;border-radius:10px;padding:10px 16px;color:#fff;cursor:pointer;font-weight:700}
+  .prev{background:#ff7043}.next{background:#4caf50}.btn:disabled{background:#bbb;cursor:not-allowed}
+  .results{text-align:center;display:none}
+  .score{font-size:2rem;font-weight:800}
+  @media(max-width:768px){.qtext{font-size:1rem}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🧠 اختبار الغدد الصماء (Endocrine System)</h1>
+    <div id="timer" class="pill">⏰ الوقت: 00:00</div>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="pill">السؤال: <span id="cur">1</span> / <span id="tot">30</span></div>
+      <div class="pill">✅ صحيحة: <span id="ok">0</span></div>
+      <div class="pill">❌ خاطئة: <span id="bad">0</span></div>
+      <div class="pill">📊 النسبة: <span id="pct">0%</span></div>
+    </div>
+    <div class="progress-bar" style="margin-top:10px"><div id="bar" class="progress"></div></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="panel results" id="res">
+    <h2>🎉 انتهى الاختبار</h2>
+    <div class="score" id="finalScore">0%</div>
+    <p>صحيحة: <b id="fok">0</b> | خاطئة: <b id="fbad">0</b></p>
+    <button class="btn next" onclick="restart()">🔄 إعادة الاختبار</button>
+  </div>
+</div>
+
+<script>
+// 30 سؤال — ثنائي اللغة — مع شرح مختصر — وتوزيع متنوع للخيارات الصحيحة
+const Q=[
+ {q:"Adrenalectomy means removal of adrenal gland / الاستئصال الجراحي للغدة الكظرية؟",a:["Adrenalectomy / استئصال الكظرية","Adrenopathy / مرض كظري","Adenectomy / استئصال غدة عامة","Pancreatectomy / استئصال البنكرياس"],c:0,d:"medium",e:"Adrenalectomy = surgical removal of an adrenal gland."},
+ {q:"Goiter refers to / تضخم الغدة الدرقية يعني:",a:["Enlargement of thyroid / تضخم الدرقية","Excess cortisol / زيادة الكورتيزول","Insulin deficiency / نقص الأنسولين","Bone loss / فقدان العظم"],c:0,d:"easy",e:"Goiter = enlargement of the thyroid gland."},
+ {q:"Hyperthyroidism is / فرط نشاط الدرقية:",a:["Hypersecretion of thyroid hormones / زيادة إفراز هرمونات الدرقية","Low T3/T4 / انخفاض هرمونات الدرقية","ADH excess / زيادة ADH","Insulin lack / نقص الأنسولين"],c:0,d:"medium",e:"Hyperthyroidism = excess T3/T4."},
+ {q:"Hypothyroidism results from / قصور الدرقية ينتج عن:",a:["Deficiency of thyroid hormones / نقص هرمونات الدرقية","Excess cortisol / زيادة الكورتيزول","Pituitary tumor / ورم نخامية","Hyperinsulinism / فرط الأنسولين"],c:0,d:"easy",e:"Hypothyroidism = low T3/T4."},
+ {q:"Thyroid carcinoma is / سرطان الدرقية هو:",a:["Malignant neoplasm / ورم خبيث","Benign tumor / ورم حميد","Enlargement / تضخم","Hormone deficiency / نقص هرموني"],c:0,d:"medium",e:"Carcinoma = malignant tumor."},
+ {q:"Hyperparathyroidism leads to / فرط جارات الدرقية يؤدي إلى:",a:["Hypercalcemia / فرط كالسيوم","Hyponatremia / نقص صوديوم","Polyuria / كثرة التبول","Hypoglycemia / نقص سكر"],c:0,d:"medium",e:"High PTH elevates serum calcium."},
+ {q:"Hypoparathyroidism causes / قصور جارات الدرقية يسبب:",a:["Tetany / تشنجات","Obesity / سمنة","Moonface / وجه قمري","Hypertension / ارتفاع ضغط"],c:0,d:"medium",e:"Low PTH → hypocalcemia → tetany."},
+ {q:"Addison disease is / مرض أديسون:",a:["Adrenal cortex hyposecretion / قصور قشرة الكظر","Thyroid excess / فرط الدرقية","Excess insulin / زيادة الأنسولين","Excess GH / زيادة GH"],c:0,d:"hard",e:"Primary adrenal insufficiency."},
+ {q:"Cushing syndrome due to / متلازمة كوشينغ بسبب:",a:["Excess cortisol / زيادة الكورتيزول","Low ADH / نقص ADH","Low insulin / نقص الأنسولين","Low GH / نقص GH"],c:0,d:"hard",e:"Usually from hypercortisolism."},
+ {q:"Adrenal virilism manifests with / الذكورة الكظرية تتميز بـ:",a:["Amenorrhea & hirsutism / انقطاع طمث وفرط شعر","Goiter / تضخم الدرقية","Polyuria / كثرة التبول","Exophthalmos / جحوظ"],c:0,d:"hard",e:"Androgen excess → virilization."},
+ {q:"Hyperinsulinism may cause / فرط الأنسولين قد يسبب:",a:["Hypoglycemia & convulsions / نقص سكر وتشنجات","Hypertension / ارتفاع ضغط","Goiter / تضخم درقية","Polyuria / كثرة التبول"],c:0,d:"medium",e:"High insulin drops glucose level."},
+ {q:"DM type 1 is / السكري النوع 1:",a:["Childhood onset / يبدأ في الطفولة","Adult onset / عند البالغين","From cortisol excess / بسبب الكورتيزول","From ADH deficiency / بسبب نقص ADH"],c:0,d:"medium",e:"Autoimmune β-cell destruction; early onset."},
+ {q:"DM type 2 is usually / السكري النوع 2 غالبًا:",a:["Adult onset / عند البالغين","Viral origin / سببه فيروس","Childhood onset / عند الأطفال","Thyroid excess / زيادة الدرقية"],c:0,d:"medium",e:"Insulin resistance; later onset."},
+ {q:"Acromegaly results from / ضخامة الأطراف بسبب:",a:["Excess GH in adults / زيادة GH عند البالغين","Excess GH in children / زيادة GH عند الأطفال","Low ADH / نقص ADH","Low cortisol / نقص الكورتيزول"],c:0,d:"hard",e:"Post-epiphyseal GH excess."},
+ {q:"Gigantism occurs due to / العملقة تحدث بسبب:",a:["Excess GH in childhood / زيادة GH في الطفولة","Lack of insulin / نقص الأنسولين","Thyroid deficiency / نقص الدرقية","Excess cortisol / زيادة الكورتيزول"],c:0,d:"medium",e:"Pre-epiphyseal GH excess."},
+ {q:"Dwarfism is due to / القزامة بسبب:",a:["GH hyposecretion / نقص GH","Hyperthyroidism / فرط الدرقية","Excess insulin / زيادة الأنسولين","Excess cortisol / زيادة الكورتيزول"],c:0,d:"medium",e:"Growth hormone deficiency."},
+ {q:"Panhypopituitarism is / القصور الشامل للنخامية:",a:["Deficiency of all pituitary hormones / نقص كل هرمونات النخامية","Excess ADH / زيادة ADH","Only GH deficiency / نقص GH فقط","Pituitary enlargement / تضخم"],c:0,d:"hard",e:"Global pituitary failure."},
+ {q:"SIADH means / متلازمة الإفراز غير المناسب للـADH:",a:["Excess ADH secretion / زيادة إفراز ADH","Lack of GH / نقص GH","Cortisol deficiency / نقص الكورتيزول","Excess insulin / زيادة الأنسولين"],c:0,d:"hard",e:"Syndrome of inappropriate ADH."},
+ {q:"Diabetes insipidus is due to / السكري الكاذب بسبب:",a:["Deficient ADH / نقص ADH","Deficient GH / نقص GH","Hyperinsulinism / فرط الأنسولين","Thyroid cancer / سرطان الدرقية"],c:0,d:"hard",e:"ADH deficiency or renal resistance."},
+ {q:"FPG test measures / اختبار سكر صائم يقيس:",a:["Glucose after 8h fasting / الجلوكوز بعد صيام 8 ساعات","T3 & T4 only / T3 وT4 فقط","Cortisol / الكورتيزول","ADH / مضاد الإدرار"],c:0,d:"easy",e:"Fasting plasma glucose."},
+ {q:"Serum & urine tests check / فحوص الدم والبول تفحص:",a:["Hormones, electrolytes, glucose / الهرمونات والكهارل والسكر","Cortisol only / الكورتيزول فقط","GH only / GH فقط","Calcium only / الكالسيوم فقط"],c:0,d:"medium",e:"General endocrine panels."},
+ {q:"Thyroid function tests include / فحوص الدرقية تشمل:",a:["T3, T4, TSH","Insulin only / الأنسولين فقط","GH only / GH فقط","Cortisol & aldosterone"],c:0,d:"easy",e:"Core TFTs = TSH + T3/T4."},
+ {q:"Exophthalmometry is / قياس جحوظ العين:",a:["Measures eye protrusion / قياس بروز العين","MRI scan / رنين","CT scan / طبقي","Ultrasound / موجات فوق صوتية"],c:0,d:"medium",e:"Used in Graves' disease assessment."},
+ {q:"CT scan useful for / فحص CT مفيد لـ:",a:["Imaging endocrine organs / تصوير الغدد الصماء","Measuring glucose / قياس السكر","Testing ADH / اختبار ADH","Measuring BP / قياس الضغط"],c:0,d:"easy",e:"Cross-sectional imaging."},
+ {q:"MRI is / التصوير بالرنين:",a:["Magnetic-based imaging / تصوير بالمجالات المغناطيسية","Ultrasound / موجات صوتية","Eye test / فحص عين","Blood test / فحص دم"],c:0,d:"easy",e:"Excellent soft tissue contrast."},
+ {q:"Thyroid scan detects / مسح الدرقية يكشف:",a:["Thyroid nodules / عقد درقية","Blood sugar / سكر الدم","Kidney stones / حصوات","Bone density / كثافة العظم"],c:0,d:"medium",e:"Radioisotope uptake patterns."},
+ {q:"Ultrasound is used for / الموجات فوق الصوتية تستخدم لـ:",a:["Soft tissue imaging / تصوير أنسجة رخوة","Measuring hormones / قياس هرمونات","Testing blood sugar / قياس سكر","Checking cortisol / فحص كورتيزول"],c:0,d:"easy",e:"Non-ionizing imaging."},
+ {q:"Hypoglycemia means / نقص سكر الدم:",a:["Low blood glucose / سكر منخفض","High cortisol / كورتيزول مرتفع","Low sodium / صوديوم منخفض","High calcium / كالسيوم مرتفع"],c:0,d:"easy",e:"Below-normal plasma glucose."},
+ {q:"Hyponatremia is / نقص صوديوم الدم:",a:["Low sodium in blood / انخفاض الصوديوم في الدم","Low calcium / نقص الكالسيوم","Low glucose / نقص الجلوكوز","Low GH / نقص GH"],c:0,d:"medium",e:"Often from SIADH, diuretics, etc."},
+ {q:"Hypercalcemia is / فرط كالسيوم الدم:",a:["High calcium in blood / ارتفاع الكالسيوم بالدم","Low calcium / انخفاض الكالسيوم","Low sodium / نقص الصوديوم","Low cortisol / نقص الكورتيزول"],c:0,d:"medium",e:"May result from hyperparathyroidism."}
+];
+
+let i=0, ok=0, bad=0, t0=null, tInt=null;
+function init(){
+  document.getElementById('tot').textContent=Q.length;
+  t0=new Date();
+  tInt=setInterval(()=>{
+    const s=Math.floor((new Date()-t0)/1000);const m=String(Math.floor(s/60)).padStart(2,'0');const ss=String(s%60).padStart(2,'0');
+    document.getElementById('timer').textContent=`⏰ الوقت: ${m}:${ss}`;
+  },1000);
+  render();
+}
+function render(){
+  const q=Q[i];
+  document.getElementById('cur').textContent=i+1;
+  document.getElementById('bar').style.width=((i+1)/Q.length*100)+'%';
+  document.getElementById('quiz').innerHTML=`
+    <div class="qbox">
+      <div class="qhead">
+        <div class="qnum">السؤال ${i+1} / ${Q.length}</div>
+        <div class="diff ${q.d}">${q.d==='easy'?'🟢 سهل':q.d==='medium'?'🟡 متوسط':'🔴 صعب'}</div>
+      </div>
+      <div class="qtext">${q.q}</div>
+      <div class="answers" id="ans">
+        ${q.a.map((t,k)=>`<div class="opt" onclick="choose(${k})">${String.fromCharCode(65+k)}. ${t}</div>`).join('')}
+      </div>
+      <div id="exp" class="explain"><b>💡 التوضيح:</b> ${q.e}</div>
+      <div class="nav">
+        <button class="btn prev" onclick="prev()" ${i===0?'disabled':''}>← السابق</button>
+        <button class="btn next" id="next" onclick="next()" disabled>${i===Q.length-1?'🏁 إنهاء':'التالي →'}</button>
+      </div>
+    </div>`;
+  updateHUD();
+}
+function choose(k){
+  const q=Q[i]; const opts=document.querySelectorAll('.opt');
+  opts.forEach((o,idx)=>{o.onclick=null; if(idx===q.c) o.classList.add('correct'); if(idx===k && k!==q.c) o.classList.add('incorrect');});
+  if(k===q.c) ok++; else bad++;
+  document.getElementById('exp').classList.add('show');
+  document.getElementById('next').disabled=false;
+  updateHUD();
+}
+function next(){ if(i<Q.length-1){i++; render();} else {finish();} }
+function prev(){ if(i>0){i--; render();} }
+function updateHUD(){
+  document.getElementById('ok').textContent=ok;
+  document.getElementById('bad').textContent=bad;
+  const ans=ok+bad; const pct=ans?Math.round(ok/ans*100):0;
+  document.getElementById('pct').textContent=pct+'%';
+}
+function finish(){
+  clearInterval(tInt);
+  document.getElementById('quiz').style.display='none';
+  const pct=Math.round(ok/Q.length*100);
+  document.getElementById('res').style.display='block';
+  document.getElementById('finalScore').textContent=pct+'%';
+  document.getElementById('fok').textContent=ok;
+  document.getElementById('fbad').textContent=bad;
+}
+function restart(){
+  i=0; ok=0; bad=0; t0=new Date();
+  document.getElementById('quiz').style.display='block';
+  document.getElementById('res').style.display='none';
+  render();
+}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
