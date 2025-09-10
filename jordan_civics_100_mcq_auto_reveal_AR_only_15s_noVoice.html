@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار وطنيات الأردن (100 سؤال) — بدون صوت</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #171a21;
+    --text: #e9ecf1;
+    --muted: #a9b0bb;
+    --accent: #4da3ff;
+    --ok: #2ecc71;
+    --bad: #ff5c5c;
+    --border: #2a2f3a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+  header { padding: 14px 18px; background: #0b0d12; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 5; }
+  header h1 { margin: 0; font-size: 18px; }
+  .container { max-width: 980px; margin: 0 auto; padding: 16px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+  .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .q-text { font-size: 18px; line-height: 1.6; }
+  .options { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
+  .opt { padding: 12px 12px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; background: #12141a; }
+  .opt.correct { border-color: var(--ok); }
+  .opt.wrong { border-color: var(--bad); }
+  .meta { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .controls { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+  button { background: var(--accent); color: #081018; border: 0; padding: 10px 14px; border-radius: 10px; cursor: pointer; }
+  button.secondary { background: #2c3442; color: var(--text); }
+  .pill { padding: 6px 10px; background: #10141c; border: 1px solid var(--border); border-radius: 999px; }
+  .reveal { color: var(--ok); font-weight: 600; margin-top: 6px; }
+  .timer { font-variant-numeric: tabular-nums; }
+  .footnote { font-size: 12px; color: var(--muted); text-align: center; margin: 18px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>اختبار وطنيات الأردن — 100 سؤال (كشف تلقائي كل 15 ثانية — بدون صوت)</h1>
+</header>
+<div class="container">
+  <div class="card">
+    <div class="row">
+      <div class="pill">السؤال <span id="qIndex">1</span> / <span id="qTotal">0</span></div>
+      <div class="pill">الوقت حتى كشف الإجابة: <span class="timer" id="countdown">15</span> ث</div>
+    </div>
+    <div class="q-text" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="reveal" id="reveal"></div>
+    <div class="controls">
+      <button id="prevBtn" class="secondary">◀ السابق</button>
+      <button id="nextBtn">التالي ▶</button>
+      <button id="revealBtn" class="secondary">كشف الإجابة الآن</button>
+      <button id="pauseBtn" class="secondary">⏸ إيقاف المؤقت</button>
+      <button id="resumeBtn" class="">▶ استئناف</button>
+    </div>
+    <div class="meta">• ترتيب الخيارات يُعاد خلطه عشوائيًا. • يكشف الإجابة تلقائيًا كل 15 ثانية ثم ينتقل للسؤال التالي تلقائيًا.</div>
+  </div>
+  <div class="footnote">المحتوى مُستقى من فصلَي التاريخ الوطني الأردني (الفصل الرابع والخامس).</div>
+</div>
+
+<script>
+const QUESTIONS = [{"q": "متى أُعلن استقلال المملكة الأردنية الهاشمية؟", "opts": ["25 أيار 1946", "14 أيار 1948", "22 آذار 1946", "17 حزيران 1946"], "ans": 0}, {"q": "ما اسم المعاهدة التي سبقت الاستقلال الأردني عام 1946؟", "opts": ["المعاهدة الأردنية البريطانية", "اتفاقية كامب ديفيد", "اتفاق الطائف", "معاهدة وادي عربة"], "ans": 0}, {"q": "من كان أول سفير بريطاني في الأردن بعد الاستقلال؟", "opts": ["أليك كيركبرايد", "أنتوني إيدن", "لورنس العرب", "إرنست بيفن"], "ans": 0}, {"q": "في أي عام عُقد مؤتمر أريحا الذي دعا لوحدة الضفتين؟", "opts": ["1948", "1950", "1946", "1952"], "ans": 0}, {"q": "متى تمت وحدة الضفتين وإقرارها في مجلس الأمة؟", "opts": ["1950", "1947", "1953", "1949"], "ans": 0}, {"q": "من هو الملك الذي وضع دستور 1952؟", "opts": ["الملك طلال بن الحسين", "الملك عبدالله الأول", "الملك الحسين", "الملك عبدالله الثاني"], "ans": 0}, {"q": "ما سبب رئيسي لتسريع تعريب الجيش عام 1956؟", "opts": ["تمكين الضباط الأردنيين من القيادة", "تقليل النفقات العسكرية", "التحول إلى الخدمة الإلزامية", "إنهاء الأحكام العرفية"], "ans": 0}, {"q": "من هو قائد الجيش الأجنبي الذي أُقيل عام 1956 في الأردن؟", "opts": ["كلوب باشا", "اللورد اللنبي", "الجنرال باتون", "مونتغمري"], "ans": 0}, {"q": "في أي عام أُلغيَت المعاهدة الأردنية البريطانية؟", "opts": ["1957", "1956", "1958", "1955"], "ans": 0}, {"q": "ما اسم الاتحاد الذي قام بين الأردن والعراق عام 1958؟", "opts": ["الاتحاد العربي", "الجمهورية العربية المتحدة", "اتحاد المشرق", "مجلس التعاون"], "ans": 0}, {"q": "ما اسم حرب 1967 لدى العرب؟", "opts": ["النكسة", "حرب التحرير", "حرب الغفران", "الاستنزاف"], "ans": 0}, {"q": "ما نتيجة حرب 1967 للأردن؟", "opts": ["خسارة الضفة الغربية", "استعادة القدس", "إنشاء قوة عربية موحدة", "إنهاء النزاع"], "ans": 0}, {"q": "ما رقم قرار مجلس الأمن عقب حرب 1967؟", "opts": ["242", "338", "181", "478"], "ans": 0}, {"q": "متى وقعت معركة الكرامة؟", "opts": ["21 آذار 1968", "5 حزيران 1967", "6 تشرين 1973", "20 تموز 1951"], "ans": 0}, {"q": "من قاد معركة الكرامة من الجانب الأردني؟", "opts": ["مشهور حديثة الجازي", "حابس المجالي", "راضي عناب", "أحمد علاء الدين"], "ans": 0}, {"q": "ما اسم الحرب بين 1968-1970؟", "opts": ["حرب الاستنزاف", "حرب الخليج", "حرب رمضان", "حرب الأيام الستة"], "ans": 0}, {"q": "أي قرار أطلق على مبادرة وقف النار في حرب الاستنزاف؟", "opts": ["مبادرة روجرز", "مبادرة فهد", "أوسلو", "فضّ الاشتباك"], "ans": 0}, {"q": "ما نتائج حرب تشرين 1973 الأساسية؟", "opts": ["قرار 338 ووقف القتال", "ضم الضفة للأردن", "تحرير سيناء فورًا", "إلغاء قرار 242"], "ans": 0}, {"q": "ما هو مشروع 1972 الذي طرحه الملك الحسين؟", "opts": ["المملكة العربية المتحدة", "اتحاد بلاد الشام", "كونفدرالية أردنية سورية", "أردن كبير"], "ans": 0}, {"q": "ما هو قرار فك الارتباط عام 1988؟", "opts": ["فك الارتباط القانوني والإداري مع الضفة", "قطع العلاقات مع العراق", "إلغاء المعاهدة مع بريطانيا", "سحب قوات من لبنان"], "ans": 0}, {"q": "متى عادت الحياة الحزبية قانونيًا بعد المنع الطويل؟", "opts": ["1992 (قانون الأحزاب)", "1984 (مجلس الأمة)", "1989 (انتخابات)", "1991 (الميثاق الوطني)"], "ans": 0}, {"q": "ما سبب هبّة نيسان 1989؟", "opts": ["أزمة اقتصادية وضرائب", "خلاف حدودي", "جفاف شديد", "قرار أممي"], "ans": 0}, {"q": "أي سنة تسلّم الملك الحسين سلطاته الدستورية؟", "opts": ["1953", "1951", "1952", "1956"], "ans": 0}, {"q": "مَنحَ دستور 1952 الأردن نظام حكم؟", "opts": ["نيابي ملكي وراثي", "رئاسي فيدرالي", "جمهوري برلماني", "سلطاني"], "ans": 0}, {"q": "متى استشهد الملك المؤسس عبدالله الأول؟", "opts": ["20 تموز 1951", "25 أيار 1946", "2 أيار 1953", "7 شباط 1999"], "ans": 0}, {"q": "أين كان حريق الأقصى الذي أطلق الإعمار الهاشمي الثالث؟", "opts": ["القدس", "عمّان", "الخليل", "غزة"], "ans": 0}, {"q": "ما دور الأردن تجاه الكويت بعد استقلالها؟", "opts": ["إرسال قوات للمساندة", "قطع العلاقات", "حظر تجاري", "وساطة حدودية"], "ans": 0}, {"q": "ما هي قوة الطوارئ الدولية بعد 1973؟", "opts": ["قوة فصل دولية", "قوات الردع العربية", "قوة عربية موحدة", "ناتو شرق أوسطي"], "ans": 0}, {"q": "من أبرز سمات الأحزاب في مرحلة ما بعد 1989؟", "opts": ["الضعف والانقسامات", "الأغلبية في البرلمان", "حظر كامل", "قيادة موحدة قوية"], "ans": 0}, {"q": "ما اسم قرار وقف القتال في 1973؟", "opts": ["338", "242", "181", "425"], "ans": 0}, {"q": "ما سبب تسمية حرب 1967 بـ\"النكسة\"؟", "opts": ["للانكسار العربي السريع", "لهزيمة إسرائيل", "لطول الحرب", "لانتصار عربي"], "ans": 0}, {"q": "ما الهدف من مشروع المملكة العربية المتحدة 1972؟", "opts": ["الحفاظ على الكيان الفلسطيني ضمن صيغة اتحادية", "ضم الضفة نهائياً للأردن", "اتحاد مع سوريا", "اتحاد نفطي"], "ans": 0}, {"q": "متى دُعي المجلس النيابي التاسع للانعقاد الاستثنائي؟", "opts": ["1984", "1976", "1974", "1991"], "ans": 0}, {"q": "ما نتيجة قرار الرباط 1974 للأردن؟", "opts": ["حلّ المجلس النيابي لاحقًا", "ضم الضفة الغربية", "الانسحاب من لبنان", "تجميد الدستور"], "ans": 0}, {"q": "من مهام المجلس الوطني الاستشاري (1978-84)?", "opts": ["إسداء المشورة والتشريع مؤقتًا", "قيادة الجيش", "تعيين الحكومة", "التفاوض الدولي"], "ans": 0}, {"q": "ما سبب إغلاق مضيق تيران قبل 1967؟", "opts": ["مصر", "الأردن", "سوريا", "العراق"], "ans": 0}, {"q": "أي بلد دعمته قوات أردنية في ظفار؟", "opts": ["عُمان", "اليمن", "السعودية", "الجزائر"], "ans": 0}, {"q": "متى عُرف نظام 'أحادي القطبية' عالميًا؟", "opts": ["1991 بعد انهيار السوفييت", "1984", "1979", "2003"], "ans": 0}, {"q": "ما أبرز ما نصّ عليه قرار 242؟", "opts": ["الانسحاب من أراضٍ محتلة", "اعتراف بإسرائيل كدولة يهودية", "تقسيم القدس", "إلغاء اللاجئين"], "ans": 0}, {"q": "في أي عام صدرت وثيقة الميثاق الوطني؟", "opts": ["1991", "1992", "1989", "1990"], "ans": 0}, {"q": "من هو راضي عناب؟", "opts": ["رئيس أركان 1956", "وزير خارجية", "قاضي دستوري", "مفتي المملكة"], "ans": 0}, {"q": "ما اسم قرار تقسيم فلسطين 1947؟", "opts": ["القرار 181", "القرار 338", "القرار 194", "القرار 425"], "ans": 0}, {"q": "ماذا يعني تعريب الجيش؟", "opts": ["إحلال قيادات عربية مكان البريطانية", "تجنيد إلزامي شامل", "تغيير الزي", "تقليل العدد"], "ans": 0}, {"q": "ما اسم حرب 1973 في المصطلح المصري؟", "opts": ["حرب أكتوبر", "حرب الغفران", "النكسة", "الاستنزاف"], "ans": 0}, {"q": "متى حُلّ المجلس النيابي العاشر؟", "opts": ["1988 (بعد فك الارتباط)", "1984", "1976", "1992"], "ans": 0}, {"q": "من نتائج الكرامة؟", "opts": ["تحطيم أسطورة الجيش الذي لا يُقهر", "ضم الضفة", "توقيع سلام", "انسحاب أردني شامل"], "ans": 0}, {"q": "ما سبب تسمية 'حرب الأيام الستة'؟", "opts": ["مدة القتال ستة أيام", "ست جبهات", "ست دول", "ست قرارات"], "ans": 0}, {"q": "ما موقف الأردن من الثورة الجزائرية؟", "opts": ["دعم مادي ومعنوي", "حياد تام", "رفض الثورة", "تدخل عسكري مباشر"], "ans": 0}, {"q": "أين قُتل الملك المؤسس؟", "opts": ["في المسجد الأقصى", "رغدان", "الكرامة", "العقبة"], "ans": 0}];
+
+let idx = 0;
+let timer = null;
+let remaining = 15;
+let shuffled = [];
+let revealed = false;
+
+const qEl = document.getElementById('question');
+const optsEl = document.getElementById('options');
+const revEl = document.getElementById('reveal');
+const qIdxEl = document.getElementById('qIndex');
+const qTotalEl = document.getElementById('qTotal');
+const cdEl = document.getElementById('countdown');
+
+qTotalEl.textContent = QUESTIONS.length;
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function prepareShuffles() {
+  shuffled = QUESTIONS.map((q) => {
+    const order = shuffle([0,1,2,3]);
+    const newIndex = order.indexOf(q.ans);
+    return { order, correct: newIndex };
+  });
+}
+
+function render() {
+  const q = QUESTIONS[idx];
+  qIdxEl.textContent = (idx+1);
+  qEl.textContent = q.q;
+  revEl.textContent = '';
+  revealed = false;
+
+  const map = shuffled[idx];
+  optsEl.innerHTML = '';
+  const arr = q.opts;
+
+  map.order.forEach((origPos, newPos) => {
+    const btn = document.createElement('div');
+    btn.className = 'opt';
+    btn.textContent = arr[origPos];
+    btn.onclick = () => selectOption(newPos);
+    optsEl.appendChild(btn);
+  });
+
+  resetTimer();
+}
+
+function selectOption(choiceIndex) {
+  const map = shuffled[idx];
+  const children = Array.from(optsEl.children);
+  children.forEach((el, i) => { if (i === map.correct) el.classList.add('correct'); });
+  if (choiceIndex !== map.correct) { children[choiceIndex].classList.add('wrong'); }
+  revealAnswer(true);
+}
+
+function revealAnswer(fromClick=false) {
+  if (revealed) return;
+  revealed = true;
+  const q = QUESTIONS[idx];
+  const map = shuffled[idx];
+  const correctText = q.opts[ map.order[ map.correct ] ];
+  revEl.textContent = 'الإجابة الصحيحة: ' + correctText;
+  setTimeout(() => next(), 1000); // small pause then auto-advance
+}
+
+function resetTimer() {
+  if (timer) clearInterval(timer);
+  remaining = 15;
+  cdEl.textContent = remaining;
+  timer = setInterval(() => {
+    remaining -= 1;
+    cdEl.textContent = remaining;
+    if (remaining <= 0) {
+      clearInterval(timer);
+      revealAnswer(false);
+    }
+  }, 1000);
+}
+
+function pauseTimer() { if (timer) { clearInterval(timer); timer = null; } }
+function resumeTimer() {
+  if (!timer) {
+    timer = setInterval(() => {
+      remaining -= 1;
+      cdEl.textContent = remaining;
+      if (remaining <= 0) { clearInterval(timer); revealAnswer(false); }
+    }, 1000);
+  }
+}
+function prev() { idx = (idx - 1 + QUESTIONS.length) % QUESTIONS.length; render(); }
+function next() { idx = (idx + 1) % QUESTIONS.length; render(); }
+
+document.getElementById('prevBtn').onclick = prev;
+document.getElementById('nextBtn').onclick = next;
+document.getElementById('revealBtn').onclick = () => revealAnswer(true);
+document.getElementById('pauseBtn').onclick = pauseTimer;
+document.getElementById('resumeBtn').onclick = resumeTimer;
+
+prepareShuffles();
+render();
+</script>
+</body>
+</html>
