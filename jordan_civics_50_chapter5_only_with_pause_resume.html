@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>50 سؤال من الفصل الخامس — مع إيقاف/استئناف</title>
+<style>
+  :root { --bg:#0f1115; --card:#171a21; --text:#e9ecf1; --muted:#a9b0bb; --accent:#4da3ff; --ok:#2ecc71; --bad:#ff5c5c; --border:#2a2f3a; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; }
+  header { padding:14px 18px; background:#0b0d12; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:5; }
+  header h1 { margin:0; font-size:18px; }
+  .container { max-width:980px; margin:0 auto; padding:16px; }
+  .card { background:#171a21; border:1px solid var(--border); border-radius:14px; padding:16px; margin-bottom:16px; }
+  .row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  .pill { padding:6px 10px; background:#10141c; border:1px solid var(--border); border-radius:999px; }
+  .q-text { font-size:18px; line-height:1.6; margin-top:8px; }
+  .options { display:grid; grid-template-columns:1fr; gap:10px; margin-top:12px; }
+  .opt { padding:12px; border:1px solid var(--border); border-radius:10px; cursor:pointer; background:#12141a; }
+  .opt.correct { border-color:var(--ok); }
+  .opt.wrong { border-color:var(--bad); }
+  .reveal { color:var(--ok); margin-top:8px; min-height:1.2em; }
+  .controls { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+  button { background:var(--accent); color:#081018; border:0; padding:10px 14px; border-radius:10px; cursor:pointer; }
+  button.secondary { background:#2c3442; color:var(--text); }
+</style></head>
+<body>
+<header><h1>اختبار وطنيات الأردن — 50 سؤال (الفصل الخامس) — يكشف كل 15 ثانية — بدون صوت</h1></header>
+<div class="container">
+  <div class="card">
+    <div class="row">
+      <div class="pill">السؤال <span id="qIndex">1</span>/<span id="qTotal">0</span></div>
+      <div class="pill">الوقت: <span id="count">15</span> ث</div>
+    </div>
+    <div id="question" class="q-text"></div>
+    <div id="options" class="options"></div>
+    <div id="reveal" class="reveal"></div>
+    <div class="controls">
+      <button id="prevBtn" class="secondary">◀ السابق</button>
+      <button id="nextBtn">التالي ▶</button>
+      <button id="revealBtn" class="secondary">كشف الآن</button>
+      <button id="pauseBtn" class="secondary">⏸ إيقاف المؤقت</button>
+      <button id="resumeBtn">▶ استئناف</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [{"q": "متى تسلّم الملك عبدالله الثاني سلطاته الدستورية؟", "opts": ["1999", "1998", "2000", "2001"], "ans": 0}, {"q": "أُطلقت الأوراق النقاشية الملكية ابتداءً من عام؟", "opts": ["2012", "2005", "2010", "2016"], "ans": 0}, {"q": "كم عدد الأوراق النقاشية الملكية؟", "opts": ["سبع", "خمس", "عشر", "ثلاث"], "ans": 0}, {"q": "المبادرة التي أبرزت صورة الإسلام الحقيقية عام 2004 هي؟", "opts": ["رسالة عمّان", "كلمة سواء", "أسبوع الوئام", "وثيقة الأخوة"], "ans": 0}, {"q": "المبادرة 2007 لتعزيز الحوار الإسلامي المسيحي اسمها؟", "opts": ["كلمة سواء", "رسالة عمّان", "وثيقة الأخوة", "تحالف الحضارات"], "ans": 0}, {"q": "المبادرة التي تبنّتها الأمم المتحدة عام 2010؟", "opts": ["أسبوع الوئام بين الأديان", "اتفاق عمّان", "وثيقة إسطنبول", "نداء الشرق"], "ans": 0}, {"q": "أي مؤسسة أُنشئت للإشراف على الانتخابات بعد الإصلاحات؟", "opts": ["الهيئة المستقلة للانتخاب", "ديوان المحاسبة", "المحكمة الدستورية", "المجلس الاقتصادي"], "ans": 0}, {"q": "متى أُنشئت المحكمة الدستورية؟", "opts": ["2011", "2012", "2016", "2018"], "ans": 1}, {"q": "قانون الانتخاب لعام 2022 خصص نسبة كم للمقاعد الحزبية مستقبلاً؟", "opts": ["65%", "30%", "50%", "25%"], "ans": 0}, {"q": "قانون الانتخاب 2022 خفّض سن الترشح إلى؟", "opts": ["25 سنة", "30 سنة", "27 سنة", "35 سنة"], "ans": 0}, {"q": "كم مؤسس كحد أدنى يشترطه قانون الأحزاب 2022؟", "opts": ["1000", "500", "300", "1200"], "ans": 0}, {"q": "النسبة الدنيا للشباب في مؤسسي الحزب وفق قانون 2022؟", "opts": ["20%", "10%", "15%", "5%"], "ans": 0}, {"q": "النسبة الدنيا للنساء في مؤسسي الحزب وفق قانون 2022؟", "opts": ["20%", "10%", "5%", "15%"], "ans": 0}, {"q": "المبادرة التعليمية 2003 لدمج التكنولوجيا في التعليم هي؟", "opts": ["تطوير التعليم من أجل اقتصاد المعرفة", "مدرستي", "التعليم للجميع", "التعلم المدمج"], "ans": 0}, {"q": "مبادرة لتحسين البيئة المدرسية عام 2008 في 500 مدرسة هي؟", "opts": ["مدرستي", "مدرسة للجميع", "التميّز التربوي", "مدارس الغد"], "ans": 0}, {"q": "مؤسسة تعليمية أُنشئت 2013 باسم؟", "opts": ["مؤسسة الملكة رانيا للتعليم والتنمية", "مؤسسة الحسين", "المجلس الأعلى للتعليم", "المركز الوطني للمناهج"], "ans": 0}, {"q": "اللغة الأجنبية التي دُرست من الصف الأول مبكراً؟", "opts": ["الإنجليزية", "الفرنسية", "الألمانية", "الإسبانية"], "ans": 0}, {"q": "متى وقعت تفجيرات عمان الإرهابية الكبرى؟", "opts": ["2005", "2001", "2003", "2006"], "ans": 0}, {"q": "عدد الشهداء في تفجيرات عمان 2005 تقريباً؟", "opts": ["60", "30", "100", "10"], "ans": 0}, {"q": "أُنشئت منطقة العقبة الاقتصادية الخاصة عام؟", "opts": ["2001", "2005", "1999", "2008"], "ans": 0}, {"q": "قطاع تكنولوجيا المعلومات بلغ عدد شركاته عام 2021؟", "opts": ["3138", "1500", "4200", "900"], "ans": 0}, {"q": "صادرات قطاع تكنولوجيا المعلومات عام 2021 تجاوزت؟", "opts": ["200 مليون دينار", "100 مليون دينار", "500 مليون دينار", "50 مليون دينار"], "ans": 0}, {"q": "عدد المنشآت الصناعية في المملكة يقارب؟", "opts": ["18 ألف", "5 آلاف", "50 ألف", "8 آلاف"], "ans": 0}, {"q": "نسبة مساهمة الصناعة بالناتج المحلي؟", "opts": ["ربع الناتج", "النصف", "العُشر", "الثلث"], "ans": 0}, {"q": "عدد الدول التي يصلها المنتج الأردني؟", "opts": ["144", "80", "200", "60"], "ans": 0}, {"q": "عدد سياح المبيت 2019 بلغ؟", "opts": ["5.4 مليون", "3.0 مليون", "7.0 مليون", "2.1 مليون"], "ans": 0}, {"q": "الدخل السياحي 2019 قُدّر بـ؟", "opts": ["1.4 مليار دينار", "0.8 مليار", "2.5 مليار", "0.5 مليار"], "ans": 0}, {"q": "في 2023 اعتُبر الأردن مركزاً إقليمياً لـ؟", "opts": ["السياحة العلاجية", "التسوق", "السياحة البيئية", "السياحة الشاطئية"], "ans": 0}, {"q": "ما أبرز التحديات الاقتصادية المزمنة؟", "opts": ["البطالة والفقر والمديونية", "الفائض التجاري", "وفرة المياه", "اعتماد النفط المحلي"], "ans": 0}, {"q": "سبب مديونية الكهرباء 2011-2014؟", "opts": ["انقطاع الغاز المصري", "زيادة الرواتب", "تراجع السياحة", "ارتفاع الاستهلاك"], "ans": 0}, {"q": "إغلاق الحدود 2014 أدى إلى؟", "opts": ["انخفاض الصادرات للنصف", "زيادة السياحة", "تحسن الميزان", "ارتفاع الصادرات"], "ans": 0}, {"q": "خسائر التجارة الشهرية بسبب إغلاق الحدود بلغت؟", "opts": ["75 مليون", "25 مليون", "10 ملايين", "5 ملايين"], "ans": 0}, {"q": "انكمش الاقتصاد الأردني عام 2020 بنسبة؟", "opts": ["-3%", "-1%", "-5%", "+2%"], "ans": 0}, {"q": "رؤية التحديث الاقتصادي أُعلنت في؟", "opts": ["2022", "2021", "2020", "2023"], "ans": 0}, {"q": "عدد محركات النمو في الرؤية؟", "opts": ["ثمانية", "أربعة", "عشرة", "اثنا عشر"], "ans": 0}, {"q": "عدد المبادرات في الرؤية؟", "opts": ["366", "120", "200", "520"], "ans": 0}, {"q": "الكلفة الرأسمالية للرؤية (مليار دينار)؟", "opts": ["41", "25", "15", "60"], "ans": 0}, {"q": "الأزمة العالمية التي أثرت 2008-2009؟", "opts": ["الأزمة المالية العالمية", "حرب الخليج", "أزمة الغذاء", "أزمة النفط"], "ans": 0}, {"q": "عملية جوية أردنية أسقطت مساعدات طبية لغزة في؟", "opts": ["تشرين الثاني 2023", "2022", "2021", "2024"], "ans": 0}, {"q": "أي نهج اتبعه الأردن في الإصلاح السياسي؟", "opts": ["التدرج والإنضاج", "الإلغاء", "التجميد", "الصدمة"], "ans": 0}, {"q": "الركيزة السياسية الداخلية كانت؟", "opts": ["أولوية الاستقرار الوطني", "إلغاء الانتخابات", "حزب إلزامي واحد", "إيقاف القضاء"], "ans": 0}, {"q": "من أبرز المبادرات للحوار بين الأديان؟", "opts": ["رسالة عمّان، كلمة سواء، أسبوع الوئام", "مدرستي", "التعليم للجميع", "مبادرة المعرفة"], "ans": 0}, {"q": "تأثر الأردن بجائحة كورونا في الاقتصاد بانكماش؟", "opts": ["2020", "2019", "2021", "2018"], "ans": 0}, {"q": "أقر الأردن قانون ضريبة الدخل المعدل عام؟", "opts": ["2018", "2015", "2010", "2020"], "ans": 0}, {"q": "تم تعديل قانون الجرائم الإلكترونية آخر مرة في؟", "opts": ["2023", "2020", "2019", "2022"], "ans": 0}, {"q": "في 2007 أطلق الأردن مبادرة؟", "opts": ["كلمة سواء", "رسالة عمان", "إعلان عمّان", "تحالف الحضارات"], "ans": 0}, {"q": "في 2010 تبنت الأمم المتحدة مبادرة أردنية؟", "opts": ["أسبوع الوئام بين الأديان", "كلمة سواء", "رسالة عمان", "حوار الحضارات"], "ans": 0}, {"q": "أُنشئت مؤسسة الملكة رانيا للتعليم والتنمية عام؟", "opts": ["2013", "2010", "2008", "2015"], "ans": 0}, {"q": "المبادرة التي طورت البيئة المدرسية عام 2008؟", "opts": ["مدرستي", "مدارس الغد", "التعليم للجميع", "تميّز"], "ans": 0}];
+let idx = 0, timer = null, rem = 15, shuffled = [], revealed = false;
+const qEl = document.getElementById('question');
+const opsEl = document.getElementById('options');
+const revEl = document.getElementById('reveal');
+const qIdxEl = document.getElementById('qIndex');
+const qTotalEl = document.getElementById('qTotal');
+const countEl = document.getElementById('count');
+
+qTotalEl.textContent = QUESTIONS.length;
+
+function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+function prepare() {
+  shuffled = QUESTIONS.map(q => {
+    const order = shuffle([0,1,2,3]);
+    return { order, correct: order.indexOf(q.ans) };
+  });
+}
+
+function render() {
+  const q = QUESTIONS[idx];
+  qIdxEl.textContent = idx + 1;
+  qEl.textContent = q.q;
+  revEl.textContent = '';
+  revealed = false;
+
+  const map = shuffled[idx];
+  opsEl.innerHTML = '';
+  map.order.forEach((origPos, i) => {
+    const d = document.createElement('div');
+    d.className = 'opt';
+    d.textContent = q.opts[origPos];
+    d.onclick = () => selectOption(i);
+    opsEl.appendChild(d);
+  });
+
+  resetTimer();
+}
+
+function selectOption(choiceIndex) {
+  const map = shuffled[idx];
+  const children = Array.from(opsEl.children);
+  children.forEach((el, i) => { if (i === map.correct) el.classList.add('correct'); });
+  if (choiceIndex !== map.correct) children[choiceIndex].classList.add('wrong');
+  revealAnswer(true);
+}
+
+function revealAnswer(fromClick=false) {
+  if (revealed) return;
+  revealed = true;
+  const q = QUESTIONS[idx];
+  const map = shuffled[idx];
+  const correct = q.opts[ map.order[ map.correct ] ];
+  revEl.textContent = 'الإجابة الصحيحة: ' + correct;
+  setTimeout(() => next(), 1000);
+}
+
+function resetTimer() {
+  if (timer) clearInterval(timer);
+  rem = 15;
+  countEl.textContent = rem;
+  timer = setInterval(() => {
+    rem -= 1;
+    countEl.textContent = rem;
+    if (rem <= 0) {
+      clearInterval(timer);
+      revealAnswer(false);
+    }
+  }, 1000);
+}
+
+function pauseTimer() { if (timer) { clearInterval(timer); timer = null; } }
+function resumeTimer() {
+  if (!timer) {
+    timer = setInterval(() => {
+      rem -= 1;
+      countEl.textContent = rem;
+      if (rem <= 0) { clearInterval(timer); revealAnswer(false); }
+    }, 1000);
+  }
+}
+
+function next() { idx = (idx + 1) % QUESTIONS.length; render(); }
+function prev() { idx = (idx - 1 + QUESTIONS.length) % QUESTIONS.length; render(); }
+
+document.getElementById('prevBtn').onclick = prev;
+document.getElementById('nextBtn').onclick = next;
+document.getElementById('revealBtn').onclick = () => revealAnswer(true);
+document.getElementById('pauseBtn').onclick = pauseTimer;
+document.getElementById('resumeBtn').onclick = resumeTimer;
+
+prepare();
+render();
+</script>
+</body></html>
